@@ -1,4 +1,5 @@
 import UIKit
+import PMSegmentedControl
 
 protocol ForecastViewModel {
   var pendingIndex: Int? { get set }
@@ -18,7 +19,7 @@ protocol ForecastViewModel {
   func city(at index: Int) -> CityDTO?
   func index(of city: CityDTO) -> Int?
   func contentViewController(at index: Int) -> ContentViewController?
-  func measuringSystemSwitched(_ sender: SegmentedControl)
+  func measuringSystemSwitched(_ sender: PMSegmentedControl)
   func showOrHideLocationServicesPrompt(at navigationController: UINavigationController)
   func loadAllData()
   func loadData(at index: Int)

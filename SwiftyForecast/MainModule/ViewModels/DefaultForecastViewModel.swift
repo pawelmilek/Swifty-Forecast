@@ -4,6 +4,7 @@ import SafariServices
 import MapKit
 import Intents
 import Contacts
+import PMSegmentedControl
 
 final class DefaultForecastViewModel: ForecastViewModel {
   private static let userLocationPageControlIndex = 0
@@ -124,7 +125,7 @@ final class DefaultForecastViewModel: ForecastViewModel {
     }
   }
   
-  func measuringSystemSwitched(_ sender: SegmentedControl) {
+  func measuringSystemSwitched(_ sender: PMSegmentedControl) {
     ForecastNotificationCenter.post(.unitNotationDidChange,
                                     object: nil,
                                     userInfo: [NotificationCenterUserInfo.segmentedControlChanged.key: sender])

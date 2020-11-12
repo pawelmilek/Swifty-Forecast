@@ -63,6 +63,7 @@
 		E26ACD0B24FC79DD00AC15A6 /* ForecastRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26ACD0A24FC79DD00AC15A6 /* ForecastRepository.swift */; };
 		E26ACD0D24FC7AAC00AC15A6 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26ACD0C24FC7AAC00AC15A6 /* Repository.swift */; };
 		E26ACD1B24FF204000AC15A6 /* ForecastDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26ACD1A24FF204000AC15A6 /* ForecastDTO.swift */; };
+		E26D6057255CD27C0071522D /* PMSegmentedControl in Frameworks */ = {isa = PBXBuildFile; productRef = E26D6056255CD27C0071522D /* PMSegmentedControl */; };
 		E270891A24CE5ADA003F7587 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891924CE5ADA003F7587 /* MainCoordinator.swift */; };
 		E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891B24CE5AEC003F7587 /* Coordinator.swift */; };
 		E2729262252D3CB500F7E872 /* TimeZoneLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2729261252D3CB500F7E872 /* TimeZoneLoader.swift */; };
@@ -180,7 +181,6 @@
 		E2CF4DD822768C3F00062E36 /* DefaultForecastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DD522768B3A00062E36 /* DefaultForecastService.swift */; };
 		E2CF4DDD227E313400062E36 /* ForecastNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DDC227E313400062E36 /* ForecastNotificationCenter.swift */; };
 		E2D960812120F34800AE0B6E /* GeocoderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* GeocoderHelper.swift */; };
-		E2DB17BF20EDCC28003982A0 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */; };
 		E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1457248D2F8700D1A329 /* InvalidReference.swift */; };
 		E2DC145F248D3CAF00D1A329 /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC145E248D3CAF00D1A329 /* NetworkConstant.swift */; };
 		E2DC1466248D493700D1A329 /* JSONFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1465248D493700D1A329 /* JSONFileLoader.swift */; };
@@ -405,7 +405,6 @@
 		E2CF4DDC227E313400062E36 /* ForecastNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastNotificationCenter.swift; sourceTree = "<group>"; };
 		E2CF4DE52288E46100062E36 /* DefaultContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContentViewModel.swift; sourceTree = "<group>"; };
 		E2D960802120F34800AE0B6E /* GeocoderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocoderHelper.swift; sourceTree = "<group>"; };
-		E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		E2DC1457248D2F8700D1A329 /* InvalidReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidReference.swift; sourceTree = "<group>"; };
 		E2DC145E248D3CAF00D1A329 /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		E2DC1465248D493700D1A329 /* JSONFileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileLoader.swift; sourceTree = "<group>"; };
@@ -437,6 +436,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E26D6057255CD27C0071522D /* PMSegmentedControl in Frameworks */,
 				E22CDFE1247C250700C9EACD /* RealmSwift in Frameworks */,
 				E22CDFDF247C250700C9EACD /* Realm in Frameworks */,
 				E233AC1223DE7D9000DC0EF5 /* Reachability in Frameworks */,
@@ -868,7 +868,6 @@
 				E2DC148E248F25A700D1A329 /* Observer.swift */,
 				E2192258214483AA0093FEBD /* OfflineViewController.swift */,
 				E28AFC742374FCC100D1D5ED /* RealmProvider.swift */,
-				E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */,
 				E27E2FAD1DA04D1D00B3EABF /* SegueIdentifierType.swift */,
 				E2DC148A248F24E800D1A329 /* StoryboardViewControllerFactory.swift */,
 				E25EF00A20F97CE200E4C115 /* Style.swift */,
@@ -1027,6 +1026,7 @@
 				E233AC1123DE7D9000DC0EF5 /* Reachability */,
 				E22CDFDE247C250700C9EACD /* Realm */,
 				E22CDFE0247C250700C9EACD /* RealmSwift */,
+				E26D6056255CD27C0071522D /* PMSegmentedControl */,
 			);
 			productName = "Swifty Forecast";
 			productReference = E29911F61D456EAC0083B484 /* SwiftyForecast.app */;
@@ -1093,6 +1093,7 @@
 			packageReferences = (
 				E233AC1023DE7D9000DC0EF5 /* XCRemoteSwiftPackageReference "Reachability" */,
 				E22CDFDD247C250700C9EACD /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				E26D6055255CD27C0071522D /* XCRemoteSwiftPackageReference "PMSegmentedControl" */,
 			);
 			productRefGroup = E29911F71D456EAC0083B484 /* Products */;
 			projectDirPath = "";
@@ -1238,7 +1239,6 @@
 				E27E2F861DA0482C00B3EABF /* ContentViewController.swift in Sources */,
 				E29B10E224E9790F0030503C /* UITableView+RealmChanges.swift in Sources */,
 				E2CF4DDD227E313400062E36 /* ForecastNotificationCenter.swift in Sources */,
-				E2DB17BF20EDCC28003982A0 /* SegmentedControl.swift in Sources */,
 				E2B035782500883E00DC0E77 /* HourlyDataDTO.swift in Sources */,
 				E2A32F7625449DC7000ACEFE /* AppStoreReviewObserverEventResponder.swift in Sources */,
 				E27E2FC11DA04D1D00B3EABF /* DequeuableCell.swift in Sources */,
@@ -1615,6 +1615,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		E26D6055255CD27C0071522D /* XCRemoteSwiftPackageReference "PMSegmentedControl" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pawelmilek/PMSegmentedControl.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1632,6 +1640,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E233AC1023DE7D9000DC0EF5 /* XCRemoteSwiftPackageReference "Reachability" */;
 			productName = Reachability;
+		};
+		E26D6056255CD27C0071522D /* PMSegmentedControl */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E26D6055255CD27C0071522D /* XCRemoteSwiftPackageReference "PMSegmentedControl" */;
+			productName = PMSegmentedControl;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,4 +1,5 @@
 import UIKit
+import PMSegmentedControl
 
 final class ContentViewController: UIViewController {
   @IBOutlet private weak var forecastView: ForecastView!
@@ -241,7 +242,7 @@ extension ContentViewController: UITableViewDelegate {
 extension ContentViewController {
   
   @objc func unitNotationDidChange(_ notification: NSNotification) {
-    guard let segmentedControl = notification.userInfo?[NotificationCenterUserInfo.segmentedControlChanged.key] as? SegmentedControl else { return }
+    guard let segmentedControl = notification.userInfo?[NotificationCenterUserInfo.segmentedControlChanged.key] as? PMSegmentedControl else { return }
     guard let unitNotation = UnitNotation(rawValue: segmentedControl.selectedIndex) else { return }
     guard let temperatureNotation = TemperatureNotation(rawValue: segmentedControl.selectedIndex) else { return }
 

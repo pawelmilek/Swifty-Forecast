@@ -1,5 +1,6 @@
 import UIKit
 import RealmSwift
+import PMSegmentedControl
 
 final class ForecastViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
@@ -13,11 +14,12 @@ final class ForecastViewController: UIViewController {
     return observer
   }()
   
-  private lazy var notationSegmentedControl: SegmentedControl = {
-    let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
-    segmentedControl.items = [TemperatureNotation.fahrenheit, TemperatureNotation.celsius]
+  private lazy var notationSegmentedControl: PMSegmentedControl = {
+    let frame = CGRect(x: 0, y: 0, width: 150, height: 25)
+    let segmentedControl = PMSegmentedControl(frame: frame)
+    segmentedControl.items = [TemperatureNotation.fahrenheit.description, TemperatureNotation.celsius.description]
     segmentedControl.selectedIndex = NotationController().temperatureNotation.rawValue
-    segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched), for: .valueChanged)
+    segmentedControl.delegate = self
     return segmentedControl
   }()
     
@@ -193,10 +195,6 @@ extension ForecastViewController {
     coordinator?.onTapPoweredByBarButton(url: powerByURL)
   }
 
-  @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
-    viewModel?.measuringSystemSwitched(sender)
-  }
-
   @objc func locationServiceDidRequestLocation(_ notification: NSNotification) {
     loadUserLocationData()
   }
@@ -243,6 +241,15 @@ extension ForecastViewController {
                                          message: message,
                                          actionTitles: actionsTitle,
                                          actions: [cancelAction, settingsAction])
+  }
+  
+}
+
+// MARK: - PMSegmentedControlDelegate protocol
+extension ForecastViewController: PMSegmentedControlDelegate {
+  
+  func segmentedControlValueDidChange(_ sender: PMSegmentedControl) {
+    viewModel?.measuringSystemSwitched(sender)
   }
   
 }
