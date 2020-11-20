@@ -13,7 +13,7 @@ extension Bundle {
   }
   
   var applicationName: String {
-    return infoDictionary?["CFBundleDisplayName"] as? String ?? "RetailNavigator"
+    return infoDictionary?["CFBundleDisplayName"] as? String ?? "SwiftyForecast"
   }
   
   var applicationReleaseDate: String {
@@ -22,10 +22,6 @@ extension Bundle {
   
   var applicationReleaseNumber: Int {
     return infoDictionary?["ApplicationReleaseNumber"] as? Int ?? 0
-  }
-  
-  var identifierSuffix: String {
-    return infoDictionary?["BundleIdentifierSuffix"] as? String ?? ""
   }
   
 }

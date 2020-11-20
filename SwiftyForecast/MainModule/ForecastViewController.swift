@@ -7,6 +7,7 @@ final class ForecastViewController: UIViewController {
   
   weak var coordinator: MainCoordinator?
   var viewModel: ForecastViewModel?
+  var notationController: NotationController?
   
   private lazy var appStoreReviewObserver: AppStoreReviewObserver = {
     let observer = AppStoreReviewObserver()
@@ -18,7 +19,7 @@ final class ForecastViewController: UIViewController {
     let frame = CGRect(x: 0, y: 0, width: 150, height: 25)
     let segmentedControl = PMSegmentedControl(frame: frame)
     segmentedControl.items = [TemperatureNotation.fahrenheit.description, TemperatureNotation.celsius.description]
-    segmentedControl.selectedIndex = NotationController().temperatureNotation.rawValue
+    segmentedControl.selectedIndex = notationController?.temperatureNotation.rawValue ?? 0
     segmentedControl.delegate = self
     return segmentedControl
   }()
@@ -365,8 +366,10 @@ extension ForecastViewController: AppStoreReviewObserverEventResponder {
 // MARK: - Factory method
 extension ForecastViewController {
   
-  static func make() -> ForecastViewController {
-    return StoryboardViewControllerFactory.make(ForecastViewController.self, from: .main)
+  static func make(notationController: NotationController = NotationController()) -> ForecastViewController {
+    let viewController = StoryboardViewControllerFactory.make(ForecastViewController.self, from: .main)
+    viewController.notationController = notationController
+    return viewController
   }
 
 }

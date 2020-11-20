@@ -3,10 +3,12 @@ import Foundation
 struct DefaultHourlyCellViewModel: HourlyCellViewModel {
   let time: String
   let conditionIcon: NSAttributedString?
+  private let notationController: NotationController
   private var hourlyData: HourlyDataDTO
   
-  init(hourlyData: HourlyDataDTO) {
+  init(hourlyData: HourlyDataDTO, notationController: NotationController = NotationController()) {
     self.hourlyData = hourlyData
+    self.notationController = notationController
     self.time = hourlyData.date.getTime()
     
     let iconSize = Style.HourlyForecastCell.conditionIconSize
@@ -19,7 +21,7 @@ extension DefaultHourlyCellViewModel {
   
   var temperature: String {
     
-    switch NotationController().temperatureNotation {
+    switch notationController.temperatureNotation {
     case .celsius:
       let temperatureInCelsius = hourlyData.temperature.ToCelsius()
       return temperatureInCelsius.roundedToString + Style.degreeSign

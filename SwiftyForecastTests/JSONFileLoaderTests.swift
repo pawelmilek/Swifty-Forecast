@@ -2,10 +2,21 @@ import XCTest
 @testable import SwiftyForecast
 
 class JSONFileLoaderTests: XCTestCase {
+  private var bundle: Bundle!
+  
+  override func setUp() {
+    super.setUp()
+    bundle = Bundle(for: type(of: self))
+  }
+  
+  override func tearDown() {
+    bundle = nil
+    super.tearDown()
+  }
   
   func testThrowingFileNotFoundException() {
     let fileName = "ghost-file-not-existing"
-    XCTAssertThrowsError(try JSONFileLoader.loadFile(with: fileName)) { error in
+    XCTAssertThrowsError(try JSONFileLoader.loadFile(with: fileName, bundle: bundle)) { error in
       if case let .fileNotFound(fileName) = (error as! FileLoaderError) {
         XCTAssertEqual(fileName, fileName)
       }
@@ -13,7 +24,7 @@ class JSONFileLoaderTests: XCTestCase {
   }
   
   func testLaodingChicagoForecast() throws {
-    let sut = try JSONFileLoader.loadFile(with: "forecastChicagoStub")
+    let sut = try JSONFileLoader.loadFile(with: "forecastChicagoStub", bundle: bundle)
     let result = NetworkResponseParser<ForecastResponse>.parseJSON(sut)
     
     switch result {

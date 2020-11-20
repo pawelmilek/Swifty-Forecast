@@ -3,8 +3,8 @@ import CoreText
 
 class FontLoader {
   
-  static func loadFont(with name: String) throws {
-    guard let path = Bundle.main.path(forResource: name, ofType: "ttf") else {
+  static func loadFont(with name: String, bundle: Bundle = Bundle.main) throws {
+    guard let path = bundle.path(forResource: name, ofType: "ttf") else {
       throw FontWeatherIconError.fileNotFound(name: name)
     }
     

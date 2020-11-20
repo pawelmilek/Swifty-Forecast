@@ -1,8 +1,8 @@
 import Foundation
 
 enum PlistFileLoader {
-  static func loadFile<T>(with name: String) throws -> T {
-    guard let path = Bundle.main.path(forResource: name, ofType: "plist"),
+  static func loadFile<T>(with name: String, bundle: Bundle = Bundle.main) throws -> T {
+    guard let path = bundle.path(forResource: name, ofType: "plist"),
           let plistXML = FileManager.default.contents(atPath: path) else {
       throw FileLoaderError.fileNotFound(name: name)
     }
@@ -16,8 +16,8 @@ enum PlistFileLoader {
     }
   }
   
-  static func loadFile<T: Decodable>(with name: String) throws -> T {
-    guard let path = Bundle.main.path(forResource: name, ofType: "plist"),
+  static func loadFile<T: Decodable>(with name: String, bundle: Bundle = Bundle.main) throws -> T {
+    guard let path = bundle.path(forResource: name, ofType: "plist"),
           let plistXML = FileManager.default.contents(atPath: path) else {
       throw FileLoaderError.fileNotFound(name: name)
     }

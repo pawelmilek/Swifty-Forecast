@@ -5,5 +5,5 @@ protocol HourlyCellViewModel {
   var conditionIcon: NSAttributedString? { get }
   var temperature: String { get }
   
-  init(hourlyData: HourlyDataDTO)
+  init(hourlyData: HourlyDataDTO, notationController: NotationController)
 }

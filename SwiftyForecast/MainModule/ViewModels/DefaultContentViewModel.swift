@@ -33,7 +33,7 @@ final class DefaultContentViewModel: ContentViewModel {
   
   var temperature: String {
     guard let currently = forecast?.currently else { return InvalidReference.notApplicable }
-    switch NotationController().temperatureNotation {
+    switch notationController.temperatureNotation {
     case .celsius:
       let temperatureInCelsius = currently.temperature.ToCelsius()
       return temperatureInCelsius.roundedToString + Style.degreeSign
@@ -61,7 +61,7 @@ final class DefaultContentViewModel: ContentViewModel {
   
   var windSpeed: String {
     let speed = forecast?.currently.windSpeed ?? 0
-    switch NotationController().unitNotation {
+    switch notationController.unitNotation {
     case .imperial:
       return String(format: "%.f MPH", speed)
       
@@ -95,11 +95,13 @@ final class DefaultContentViewModel: ContentViewModel {
   
   private let city: CityDTO
   private let repository: Repository
+  private let notationController: NotationController
   private var forecast: ForecastDTO?
   
-  init(city: CityDTO, repository: Repository) {
+  init(city: CityDTO, repository: Repository, notationController: NotationController = NotationController()) {
     self.city = city
     self.repository = repository
+    self.notationController = notationController
   }
 }
 

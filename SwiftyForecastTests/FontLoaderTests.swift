@@ -3,15 +3,12 @@ import XCTest
 
 class FontLoaderTests: XCTestCase {
   
-  override func setUp() {
-    super.setUp()
-  }
-  
-  override func tearDown() {
-    super.tearDown()
-  }
-  
-  func testExample() {
-    // TODO: - Implement tests
+  func testLoadFont_throwsFileNotFoundError() {
+    let name = "FontWeather_not_existing"
+    XCTAssertThrowsError(try FontLoader.loadFont(with: name, bundle: Bundle(for: type(of: self)))) { error in
+      if case let .fileNotFound(fileName) = (error as! FontWeatherIconError) {
+        XCTAssertEqual(fileName, fileName)
+      }
+    }
   }
 }

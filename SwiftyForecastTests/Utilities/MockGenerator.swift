@@ -28,7 +28,7 @@ struct MockGenerator {
   
   static func generateForecast() -> ForecastResponse? {
     do {
-      let data = try JSONFileLoader.loadFile(with: "forecastChicagoStub")
+      let data = try JSONFileLoader.loadFile(with: "forecastChicagoStub", bundle: Bundle(for: JSONFileLoaderTests.self))
       let result = NetworkResponseParser<ForecastResponse>.parseJSON(data)
       
       switch result {
