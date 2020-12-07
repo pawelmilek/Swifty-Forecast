@@ -9,7 +9,7 @@ import RealmSwift
   dynamic var humidity = 0.0
   dynamic var pressure = 0.0
   dynamic var windSpeed = 0.0
-    
+
   private enum CodingKeys: String, CodingKey {
     case summary
     case icon
@@ -20,7 +20,7 @@ import RealmSwift
     case windSpeed
     case time
   }
-  
+
   convenience init(date: Date,
                    summary: String,
                    icon: String,
@@ -37,7 +37,7 @@ import RealmSwift
     self.pressure = pressure
     self.windSpeed = windSpeed
   }
-  
+
   required convenience init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -49,7 +49,7 @@ import RealmSwift
     let humidity = try container.decode(Double.self, forKey: .humidity)
     let pressure = try container.decode(Double.self, forKey: .pressure)
     let windSpeed = try container.decode(Double.self, forKey: .windSpeed)
-    
+
     self.init(date: date,
               summary: summary,
               icon: icon,
@@ -58,7 +58,7 @@ import RealmSwift
               pressure: pressure,
               windSpeed: windSpeed)
   }
-  
+
   required init() {
     super.init()
   }

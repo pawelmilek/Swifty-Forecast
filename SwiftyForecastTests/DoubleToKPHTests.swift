@@ -10,7 +10,7 @@ class DoubleToKPHTests: XCTestCase {
   func testTwoMilesDistance() {
     XCTAssertEqual(2.0.toKPH(), 3.218688)
   }
-  
+
   func testTenMilesDistance() {
     XCTAssertEqual(10.0.toKPH(), 16.09344)
   }

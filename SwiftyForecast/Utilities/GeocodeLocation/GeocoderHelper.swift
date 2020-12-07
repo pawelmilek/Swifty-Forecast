@@ -2,39 +2,41 @@ import Foundation
 import CoreLocation
 
 final class GeocoderHelper {
-  
-  class func currentLocation(completion: @escaping (Result<CLPlacemark, GeocoderError>) -> ()) {
+
+  class func currentLocation(completion: @escaping (Result<CLPlacemark, GeocoderError>) -> Void) {
     guard LocationProvider.shared.isLocationServicesEnabled else {
       completion(.failure(.locationDisabled))
       return
     }
-    
+
     LocationProvider.shared.request { location in
       GeocoderHelper.place(at: location.coordinate) { result in
         switch result {
         case .success(let data):
           completion(.success(data))
-          
+
         case .failure(let error):
           completion(.failure(error))
         }
       }
     }
   }
-  
-  class func coordinate(by address: String, completionHandler: @escaping (Result<CLLocationCoordinate2D, GeocoderError>) -> ()) {
+
+  class func coordinate(by address: String,
+                        completionHandler: @escaping (Result<CLLocationCoordinate2D, GeocoderError>) -> Void) {
     CLGeocoder().geocodeAddressString(address) { placemarks, error in
       guard let placemark = placemarks?.last,
             let coordinate = placemark.location?.coordinate, error == nil else {
           completionHandler(.failure(GeocoderError.coordinateNotFound))
           return
       }
-      
+
       completionHandler(.success(coordinate))
     }
   }
-  
-  class func place(at coordinate: CLLocationCoordinate2D, completionHandler: @escaping (Result<CLPlacemark, GeocoderError>) -> ()) {
+
+  class func place(at coordinate: CLLocationCoordinate2D,
+                   completionHandler: @escaping (Result<CLPlacemark, GeocoderError>) -> Void) {
     let location = CLLocation(latitude: CLLocationDegrees(coordinate.latitude),
                               longitude: CLLocationDegrees(coordinate.longitude))
     CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
@@ -42,12 +44,13 @@ final class GeocoderHelper {
         completionHandler(.failure(GeocoderError.placeNotFound))
         return
       }
-      
+
       completionHandler(.success(placemark))
     }
   }
-  
-  class func timeZone(for coordinate: CLLocationCoordinate2D, completionHandler: @escaping (Result<TimeZone, GeocoderError>) -> ()) {
+
+  class func timeZone(for coordinate: CLLocationCoordinate2D,
+                      completionHandler: @escaping (Result<TimeZone, GeocoderError>) -> Void) {
     let location = CLLocation(latitude: CLLocationDegrees(coordinate.latitude),
                               longitude: CLLocationDegrees(coordinate.longitude))
     CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
@@ -56,7 +59,7 @@ final class GeocoderHelper {
           completionHandler(.failure(GeocoderError.timezoneNotFound))
           return
       }
-      
+
       debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(timezone)")
       completionHandler(.success(timezone))
     }

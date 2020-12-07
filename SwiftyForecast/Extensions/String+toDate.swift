@@ -1,7 +1,7 @@
 import Foundation
 
 extension String {
-  
+
   func toDate(withFormat format: String = "yyyy-MM-dd HH:mm") -> Date? {
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -9,5 +9,5 @@ extension String {
     let date = dateFormatter.date(from: self)
     return date
   }
-  
+
 }

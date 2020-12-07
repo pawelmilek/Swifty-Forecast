@@ -3,7 +3,7 @@ import RealmSwift
 import CoreLocation
 
 struct ModelTranslator {
-  
+
   func translate(_ city: City?) -> CityDTO? {
     guard let city = city else { return nil }
     guard let placemark = city.placemark else { return nil }
@@ -22,13 +22,13 @@ struct ModelTranslator {
                           localTime: city.localTime)
     return cityDTO
   }
-  
+
   func translate(forecast: ForecastResponse?) -> ForecastDTO? {
     guard let forecast = forecast else { return nil }
     guard let currently = translate(forecast.currently) else { return nil }
     guard let hourly = translate(forecast.hourly) else { return nil }
     guard let daily = translate(forecast.daily) else { return nil }
-    
+
     let forecastDTO = ForecastDTO(timezone: forecast.timezone,
                                   latitude: forecast.latitude,
                                   longitude: forecast.longitude,
@@ -37,10 +37,10 @@ struct ModelTranslator {
                                   daily: daily)
     return forecastDTO
   }
-  
+
   func translate(_ currentForecast: CurrentForecast?) -> CurrentForecastDTO? {
     guard let currentForecast = currentForecast else { return nil }
-    
+
     let currentForecastDTO = CurrentForecastDTO(date: currentForecast.date,
                                                 temperature: currentForecast.temperature,
                                                 summary: currentForecast.summary,
@@ -50,28 +50,30 @@ struct ModelTranslator {
                                                 windSpeed: currentForecast.windSpeed)
     return currentForecastDTO
   }
-  
+
   func translate(_ hourlyForecast: HourlyForecast?) -> HourlyForecastDTO? {
     guard let hourlyForecast = hourlyForecast else { return nil }
-    
+
     let hourlyData = Array(hourlyForecast.data).compactMap({ self.translate($0) })
-    let hourlyForecastDTO = HourlyForecastDTO(summary: hourlyForecast.summary, icon: hourlyForecast.icon, data: hourlyData)
+    let hourlyForecastDTO = HourlyForecastDTO(summary: hourlyForecast.summary,
+                                              icon: hourlyForecast.icon,
+                                              data: hourlyData)
     return hourlyForecastDTO
   }
-  
+
   func translate(_ hourlyData: HourlyData?) -> HourlyDataDTO? {
     guard let hourlyData = hourlyData else { return nil }
-    
+
     let hourlyDataDTO = HourlyDataDTO(date: hourlyData.date,
                                       summary: hourlyData.summary,
                                       icon: hourlyData.icon,
                                       temperature: hourlyData.temperature)
     return hourlyDataDTO
   }
-  
+
   func translate(_ dailyData: DailyData?) -> DailyDataDTO? {
     guard let dailyData = dailyData else { return nil }
-    
+
     let dailyDataDTO = DailyDataDTO(date: dailyData.date,
                                     summary: dailyData.summary,
                                     icon: dailyData.icon,
@@ -81,11 +83,11 @@ struct ModelTranslator {
                                     temperatureMax: dailyData.temperatureMax)
     return dailyDataDTO
   }
-  
+
   func translate(_ dailyForecast: DailyForecast?) -> DailyForecastDTO? {
     guard let dailyForecast = dailyForecast else { return nil }
     guard let currentDayData = translate(dailyForecast.currentDayData) else { return nil }
-    
+
     let sevenDaysData = Array(dailyForecast.sevenDaysData).compactMap({ self.translate($0) })
     let dailyForecastDTO = DailyForecastDTO(summary: dailyForecast.summary,
                                             icon: dailyForecast.icon,
@@ -98,7 +100,7 @@ struct ModelTranslator {
 
 // MARK: - Data Transfer Object translate to model
 extension ModelTranslator {
-  
+
   func translate(dto: CityDTO, in realm: Realm? = RealmProvider.core.realm) -> City {
     let city = City(name: dto.name,
                     country: dto.country,
@@ -110,9 +112,9 @@ extension ModelTranslator {
                     isUserLocation: dto.isUserLocation)
     return city
   }
-  
+
   func translate(dto: LocationDTO) -> CLLocation {
     return CLLocation(latitude: dto.latitude, longitude: dto.longitude)
   }
-  
+
 }

@@ -3,7 +3,7 @@ enum NotificationCenterUserInfo: String {
   case cityUpdatedAtIndex
   case cityUpdated
   case cityAdded
-  
+
   var key: String {
     return self.rawValue
   }

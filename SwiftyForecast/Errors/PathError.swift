@@ -12,7 +12,7 @@ extension PathError: LocalizedError {
     switch self {
     case .notFound:
       return "Resource not found"
-      
+
     case .containerNotFound(let id):
       return "Shared container for group \(id) not found"
     }

@@ -18,7 +18,7 @@ import RealmSwift
   dynamic var cloudCover = 0.0
   dynamic var visibility = 0.0
   dynamic var ozone = 0.0
-  
+
   private enum CodingKeys: String, CodingKey {
     case summary
     case icon
@@ -37,7 +37,7 @@ import RealmSwift
     case ozone
     case time
   }
-  
+
   convenience init(date: Date,
                    summary: String,
                    icon: String,
@@ -72,10 +72,10 @@ import RealmSwift
     self.visibility = visibility
     self.ozone = ozone
   }
-  
+
   required convenience init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    
+
     let timeInterval = try container.decode(Int.self, forKey: .time)
     let date = Date(timeIntervalSince1970: TimeInterval(timeInterval))
     let summary = try container.decode(String.self, forKey: .summary)
@@ -93,7 +93,7 @@ import RealmSwift
     let cloudCover = try container.decode(Double.self, forKey: .cloudCover)
     let visibility = try container.decode(Double.self, forKey: .visibility)
     let ozone = try container.decode(Double.self, forKey: .ozone)
-    
+
     self.init(date: date,
               summary: summary,
               icon: icon,
@@ -111,7 +111,7 @@ import RealmSwift
               visibility: visibility,
               ozone: ozone)
   }
-  
+
   required init() {
     super.init()
   }

@@ -11,12 +11,12 @@ struct DefaultForecastWebRequest: ForecastWebRequest {
     fullPath.append("/\(latitude),\(longitude)")
     return fullPath
   }
-  
+
   let baseURL = URL(string: NetworkConstant.baseURL)!
   let parameters: Parameters
   var latitude = 0.0
   var longitude = 0.0
-  
+
   init() {
     self.parameters = [NetworkConstant.ParameterKey.exclude: "minutely,alerts,flags",
                        NetworkConstant.ParameterKey.units: "us"]

@@ -1,7 +1,7 @@
 import UIKit
 
 extension UITableView {
-  
+
   func applyChanges(deletions: [Int], insertions: [Int], updates: [Int]) {
     beginUpdates()
     deleteRows(at: deletions.map(IndexPath.fromRow), with: .fade)

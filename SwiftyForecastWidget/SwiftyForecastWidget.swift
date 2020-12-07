@@ -14,12 +14,12 @@ struct Provider: TimelineProvider {
         SimpleEntry(date: Date())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(date: Date())
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         var entries: [SimpleEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
@@ -39,7 +39,7 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
 }
 
-struct SwiftyForecastWidgetEntryView : View {
+struct SwiftyForecastWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {

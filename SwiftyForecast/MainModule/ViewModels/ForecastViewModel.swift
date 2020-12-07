@@ -7,13 +7,16 @@ protocol ForecastViewModel {
   var numberOfCities: Int { get }
   var powerByURL: URL? { get }
   var currentVisibleViewControllers: [UIViewController] { get }
-  
+
   var onIndexUpdate: ((Int) -> Void)? { get set }
   var onLoadingStatus: ((Bool) -> Void)? { get set }
   var onSuccess: (() -> Void)? { get set }
-  
-  init(repository: Repository, cityDataAccessObject: CityDAO, forecastDataAccessObject: ForecastDAO, modelTranslator: ModelTranslator)
-  
+
+  init(repository: Repository,
+       cityDataAccessObject: CityDAO,
+       forecastDataAccessObject: ForecastDAO,
+       modelTranslator: ModelTranslator)
+
   func addContentViewModel(at index: Int)
   func removeContentViewModel(with location: LocationDTO)
   func city(at index: Int) -> CityDTO?

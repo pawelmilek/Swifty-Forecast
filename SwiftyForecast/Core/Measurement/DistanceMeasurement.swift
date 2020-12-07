@@ -1,12 +1,13 @@
 import Foundation
 
+// swiftlint:disable identifier_name
 struct DistanceMeasurement {
   var value: Double {
     measurement.value
   }
-  
+
   private let measurement: Measurement<UnitLength>
-  
+
   init(value: Double, unit: UnitLength) {
     measurement = Measurement(value: value, unit: unit)
   }

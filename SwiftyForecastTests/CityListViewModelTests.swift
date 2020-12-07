@@ -3,6 +3,7 @@ import MapKit
 @testable import RealmSwift
 @testable import SwiftyForecast
 
+// swiftlint:disable force_try
 class CityListViewModelTests: XCTestCase {
   private var realm: Realm!
   private var city: City!
@@ -11,7 +12,6 @@ class CityListViewModelTests: XCTestCase {
   override func setUp() {
     super.setUp()
     realm = try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: "TemporaryRealm"))
-
 
     let cityDTO = MockGenerator.generateCityDTO()
     city = ModelTranslator().translate(dto: cityDTO, in: realm)
@@ -29,7 +29,6 @@ class CityListViewModelTests: XCTestCase {
     sut = nil
     super.tearDown()
   }
-
 
   func testNumberOfCities_returnsOneCity() {
     let expected = 1

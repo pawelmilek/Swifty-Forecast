@@ -1,10 +1,10 @@
 struct NetworkConstant {
   static let baseURL = "https://api.forecast.io"
   static let path = "forecast"
-  
+
   enum APIKey {
     case darkSky
-    
+
     var token: String {
       switch self {
       case .darkSky:
@@ -12,7 +12,7 @@ struct NetworkConstant {
       }
     }
   }
-  
+
   struct ParameterKey {
     static let exclude = "exclude"
     static let units = "units"

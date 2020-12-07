@@ -4,12 +4,12 @@ final class DailyTableViewCell: UITableViewCell {
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var iconLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!
-  
+
   override func awakeFromNib() {
     super.awakeFromNib()
     self.setUp()
   }
-  
+
   override func prepareForReuse() {
     super.prepareForReuse()
     configure(by: .none)
@@ -18,27 +18,27 @@ final class DailyTableViewCell: UITableViewCell {
 
 // MARK: - Private - SetUps
 private extension DailyTableViewCell {
-  
+
   func setUp() {
     backgroundColor = Style.DailyForecastCell.backgroundColor
-  
+
     dateLabel.textColor = Style.DailyForecastCell.dateLabelTextColor
     dateLabel.textAlignment = Style.DailyForecastCell.dateLabelTextAlignment
     dateLabel.numberOfLines = 2
-    
+
     iconLabel.textColor = Style.DailyForecastCell.iconLabelTextColor
     iconLabel.textAlignment = Style.DailyForecastCell.iconLabelTextAlignment
-    
+
     temperatureLabel.font = Style.DailyForecastCell.temperatureLabelFont
     temperatureLabel.textColor = Style.DailyForecastCell.temperatureLabelTextColor
     temperatureLabel.textAlignment = Style.DailyForecastCell.temperatureLabelTextAlignment
   }
-  
+
 }
 
 // MARK: - Configurate cell by item
 extension DailyTableViewCell {
-  
+
   func configure(by item: DailyCellViewModel?) {
     if let daily = item {
       dateLabel.attributedText = daily.attributedDate
@@ -55,5 +55,5 @@ extension DailyTableViewCell {
       temperatureLabel.alpha = 0
     }
   }
-  
+
 }

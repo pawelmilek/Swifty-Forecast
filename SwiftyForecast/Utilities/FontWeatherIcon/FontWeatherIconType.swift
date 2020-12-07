@@ -1,5 +1,8 @@
 import UIKit
 
+// swiftlint:disable type_body_length
+// swiftlint:disable identifier_name
+// swiftlint:disable file_length
 enum FontWeatherIconType: String {
   case windBeaufort0 = "\u{f0b7}"
   case windBeaufort1 = "\u{f0b8}"
@@ -36,7 +39,7 @@ enum FontWeatherIconType: String {
   case daySunnyOvercast = "\u{f00c}"
   case dayThunderstorm = "\u{f010}"
   case dayWindy = "\u{f085}"
-  case SolarEclipse = "\u{f06e}"
+  case solarEclipse = "\u{f06e}"
   case hot = "\u{f072}"
   case dayCloudyHigh = "\u{f07d}"
   case dayLightWind = "\u{f0c4}"
@@ -224,33 +227,33 @@ enum FontWeatherIconType: String {
 
 // MARK: - String from the given CSS icon code. https://erikflowers.github.io/weather-icons/
 extension FontWeatherIconType {
-  
+
   static func make(from name: String) -> FontWeatherIconType? {
     guard let rawValue = fontWeatherIcons[name], let icon = FontWeatherIconType(rawValue: rawValue) else { return nil }
     return icon
   }
-  
+
   func attributedString(font size: CGFloat) -> NSAttributedString {
     let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.fontWeather(size: size)]
     let attributedString = NSAttributedString(string: self.iconCode, attributes: attributes)
-    
+
     return attributedString
   }
-  
+
 }
 
 // MARK: - CSS icon code
 extension FontWeatherIconType {
-  
+
   var iconCode: String {
     return self.rawValue
   }
-  
+
 }
 
 // MARK: - Private - An array of FontWeather icon codes.
 extension FontWeatherIconType {
-  
+
   private static var fontWeatherIcons: [String: String] {
     return [
       "wind-beaufort-0": "\u{f0b7}",
@@ -474,5 +477,4 @@ extension FontWeatherIconType {
       "time-12": "\u{f089}"
     ]
   }
-  
 }

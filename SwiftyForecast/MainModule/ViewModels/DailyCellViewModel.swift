@@ -5,6 +5,6 @@ protocol DailyCellViewModel {
   var conditionIcon: NSAttributedString? { get }
   var temperatureMin: String { get }
   var temperatureMax: String { get }
-  
-  init(dailyData: DailyDataDTO,  notationController: NotationController)
+
+  init(dailyData: DailyDataDTO, notationController: NotationController)
 }

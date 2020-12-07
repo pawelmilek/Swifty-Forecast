@@ -6,18 +6,18 @@ enum FileLoaderError: ErrorHandleable {
 
 // MARK: - ErrorHandleable protocol
 extension FileLoaderError {
-  
+
   var description: String {
     switch self {
-    case .fileNotFound(_):
+    case .fileNotFound:
       return "File Not Found"
 
     case .incorrectFormat:
       return "Error reading unrecognized format"
-      
+
     case .unsupportedError:
       return "Unsupported Error"
     }
   }
-  
+
 }

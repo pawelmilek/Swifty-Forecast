@@ -5,19 +5,20 @@ import CoreLocation
 struct ForecastRepository: Repository {
   private let service: ForecastService
   private var dataAccessObject: ForecastDAO
-  
+
   init(service: ForecastService, dataAccessObject: ForecastDAO = DefaultForecastDAO()) {
     self.service = service
     self.dataAccessObject = dataAccessObject
   }
-  
+
   func getForecast(latitude: Double,
                    longitude: Double,
-                   completion: @escaping (Result<ForecastDTO?, WebServiceError>) -> ()) {
-    if let data = dataAccessObject.get(latitude: latitude, longitude: longitude), !RateLimiter.shouldFetch(by: data.lastUpdate) {
+                   completion: @escaping (Result<ForecastDTO?, WebServiceError>) -> Void) {
+    if let data = dataAccessObject.get(latitude: latitude, longitude: longitude),
+       !RateLimiter.shouldFetch(by: data.lastUpdate) {
       let forecastDTO = ModelTranslator().translate(forecast: data)
       completion(.success(forecastDTO))
-      
+
     } else {
       service.getForecast(latitude: latitude, longitude: longitude) { result in
         switch result {

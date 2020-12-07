@@ -10,7 +10,7 @@ enum CityProperty: String {
   case isUserLocation
   case latitude
   case longitude
-  
+
   var key: String {
     return self.rawValue
   }

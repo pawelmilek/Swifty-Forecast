@@ -11,16 +11,16 @@ extension UINavigationController {
     }
   }
 
-  func push(viewController vc: UIViewController,
+  func push(viewController: UIViewController,
             transitionType type: CATransitionType,
             transitionSubtype subtype: CATransitionSubtype,
             duration: CFTimeInterval = 0.3) {
     DispatchQueue.main.async {
       self.addTransition(transitionType: type, transitionSubtype: subtype, duration: duration)
-      self.pushViewController(vc, animated: false)
+      self.pushViewController(viewController, animated: false)
     }
   }
-  
+
   private func addTransition(transitionType type: CATransitionType,
                              transitionSubtype subtype: CATransitionSubtype,
                              duration: CFTimeInterval = 0.3) {
@@ -31,5 +31,5 @@ extension UINavigationController {
     transition.subtype = subtype
     self.view.layer.add(transition, forKey: nil)
   }
-  
+
 }

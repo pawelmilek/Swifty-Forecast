@@ -13,43 +13,43 @@ struct MockGenerator {
   static func generateTimezone() -> String {
     return forecastDTO.timezone
   }
-  
+
   static func generateCurrentForecast() -> CurrentForecastDTO {
     return forecastDTO.currently
   }
-  
+
   static func generateHourlyForecast() -> HourlyForecastDTO {
     return forecastDTO.hourly
   }
-  
+
   static func generateDailyForecast() -> DailyForecastDTO {
     return forecastDTO.daily
   }
-  
+
   static func generateForecast() -> ForecastResponse? {
     do {
       let data = try JSONFileLoader.loadFile(with: "forecastChicagoStub", bundle: Bundle(for: JSONFileLoaderTests.self))
       let result = NetworkResponseParser<ForecastResponse>.parseJSON(data)
-      
+
       switch result {
       case .success(let data):
         return data
-        
+
       case .failure(let error):
         debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(error.localizedDescription)")
       }
-      
+
     } catch {
       debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(error.localizedDescription)")
     }
-    
+
     return nil
   }
 }
 
 // MARK: - Data Transfer Objects
 extension MockGenerator {
-  
+
   static func generateCityDTO() -> CityDTO {
     let latitude = 37.33233141
     let longitude = -122.0312186
@@ -68,7 +68,7 @@ extension MockGenerator {
                           longitude: longitude,
                           placemark: placemark,
                           localTime: "10:00AM")
-    
+
     return cityDTO
   }
 }

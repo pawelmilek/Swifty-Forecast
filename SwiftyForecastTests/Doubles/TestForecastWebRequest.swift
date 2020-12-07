@@ -12,12 +12,12 @@ struct TestForecastWebRequest: ForecastWebRequest {
     fullPath.append("/\(latitude),\(longitude)")
     return fullPath
   }
-  
+
   let baseURL = URL(string: "https://mockURL")!
   let parameters: Parameters
   var latitude = 0.0
   var longitude = 0.0
-  
+
   init() {
     self.parameters = [:]
   }

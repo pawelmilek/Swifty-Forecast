@@ -6,25 +6,25 @@ struct DefaultDailyCellViewModel: DailyCellViewModel {
   var temperatureMin: String {
     switch notationController.temperatureNotation {
     case .celsius:
-      let temperatureInCelsiusMin = dailyData.temperatureMin.ToCelsius()
+      let temperatureInCelsiusMin = dailyData.temperatureMin.toCelsius()
       return temperatureInCelsiusMin.roundedToString + Style.degreeSign
-      
+
     case .fahrenheit:
       return dailyData.temperatureMin.roundedToString + Style.degreeSign
     }
   }
-  
+
   var temperatureMax: String {
     switch notationController.temperatureNotation {
     case .celsius:
-      let temperatureInCelsiusMax = dailyData.temperatureMax.ToCelsius()
+      let temperatureInCelsiusMax = dailyData.temperatureMax.toCelsius()
       return temperatureInCelsiusMax.roundedToString + Style.degreeSign
-      
+
     case .fahrenheit:
       return dailyData.temperatureMax.roundedToString + Style.degreeSign
     }
   }
-  
+
   private let dailyData: DailyDataDTO
   private let notationController: NotationController
 

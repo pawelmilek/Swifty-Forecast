@@ -8,10 +8,10 @@ struct DefaultCityCellViewModel: CityCellViewModel {
   var localTime: String {
     return city.localTime
   }
-  
+
   var map: (annotation: MKPointAnnotation, region: MKCoordinateRegion)? {
     guard let placemark = city.placemark else { return nil }
-    
+
     let mkPlacemark = MKPlacemark(placemark: placemark)
     let annotation = MKPointAnnotation()
     annotation.coordinate = mkPlacemark.coordinate
@@ -24,9 +24,9 @@ struct DefaultCityCellViewModel: CityCellViewModel {
     let region = MKCoordinateRegion(center: mkPlacemark.coordinate, span: span)
     return (annotation: annotation, region: region)
   }
-  
+
   private let city: City
-  
+
   init(city: City) {
     self.city = city
     fetchTimeZone(for: city)
@@ -39,14 +39,18 @@ private extension DefaultCityCellViewModel {
   func fetchTimeZone(for city: City) {
     guard city.timeZoneName == InvalidReference.notApplicable else { return }
     let coordinate = city.location.coordinate
-    
+
     GeocoderHelper.timeZone(for: coordinate) { result in
       switch result {
       case .success(let data):
         let realm = RealmProvider.core.realm
-        
-        try! realm.write {
-          city.timeZoneName = data.identifier
+
+        do {
+          try realm.write {
+            city.timeZoneName = data.identifier
+          }
+        } catch {
+          fatalError("Realm transaction error")
         }
 
       case .failure:
