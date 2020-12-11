@@ -1,7 +1,7 @@
 import Foundation
 @testable import SwiftyForecast
 
-class URLSessionDataTaskMock: URLSessionDataTask {
+class MockURLSessionDataTask: URLSessionDataTask {
   private let closure: () -> Void
 
   init(closure: @escaping () -> Void) {

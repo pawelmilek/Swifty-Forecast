@@ -1,6 +1,7 @@
 import UIKit
 import RealmSwift
 import PMSegmentedControl
+import PMActivityIndicatorView
 
 final class ForecastViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
@@ -87,15 +88,15 @@ private extension ForecastViewController {
       }
     }
 
-    viewModel?.onLoadingStatus = { isLoading in
-      DispatchQueue.main.async {
-        if isLoading {
-          ActivityIndicatorView.shared.startAnimating()
-        } else {
-          ActivityIndicatorView.shared.stopAnimating()
-        }
-      }
-    }
+//    viewModel?.onLoadingStatus = { isLoading in
+//      DispatchQueue.main.async {
+//        if isLoading {
+//          PMActivityIndicatorView.shared.startAnimating()
+//        } else {
+//          PMActivityIndicatorView.shared.stopAnimating()
+//        }
+//      }
+//    }
   }
 
   func setPageControl() {
@@ -148,28 +149,28 @@ private extension ForecastViewController {
 private extension ForecastViewController {
 
   func addNotificationObservers() {
-    ForecastNotificationCenter.add(observer: self,
+      ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(locationServiceDidRequestLocation),
                                    for: .locationServiceDidRequestLocation)
-    ForecastNotificationCenter.add(observer: self,
+      ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(applicationDidBecomeActive),
                                    for: .applicationDidBecomeActive)
 
-    ForecastNotificationCenter.add(observer: self,
+      ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(contentDataDidChange),
                                    for: .reloadContentPageData)
 
-    ForecastNotificationCenter.add(observer: self,
+      ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(locationDidRemoveFromList),
                                    for: .cityRemovedFromLocationList)
 
-    ForecastNotificationCenter.add(observer: self,
+      ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(locationProviderDidFailWithError),
                                    for: .locationProviderDidFail)
   }
 
   func removeNotificationObservers() {
-    ForecastNotificationCenter.remove(observer: self)
+      ForecastNotificationCenter.remove(observer: self)
   }
 
 }

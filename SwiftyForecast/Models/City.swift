@@ -1,9 +1,6 @@
 import Foundation
 import CoreLocation
 import RealmSwift
-import MapKit
-import Intents
-import Contacts
 
 @objcMembers final class City: Object, Codable {
   dynamic var orderIndex = 0
@@ -107,101 +104,4 @@ import Contacts
     longitude = placemark.location?.coordinate.longitude ?? 0.0
     self.compoundKey = compoundKeyValue
   }
-}
-
-// MARK: - CRUD methods
-extension City {
-
-  static func fetchAll(in realm: Realm? = RealmProvider.core.realm) throws -> Results<City> {
-    guard let realm = realm else { throw RealmError.initializationFailed }
-    return realm.objects(City.self)
-  }
-
-  static func fetchAllOrderedByIndex(in realm: Realm? = RealmProvider.core.realm) throws -> Results<City> {
-    guard let realm = realm else { throw RealmError.initializationFailed }
-
-    let sortDescriptors = [SortDescriptor(keyPath: CityProperty.orderIndex.key, ascending: true),
-                           SortDescriptor(keyPath: CityProperty.isUserLocation.key, ascending: false)]
-    return realm.objects(City.self).sorted(by: sortDescriptors)
-  }
-
-  static func add(_ city: City, in realm: Realm? = RealmProvider.core.realm) throws {
-    guard let realm = realm else { throw RealmError.initializationFailed }
-
-    do {
-      city.orderIndex = nextSortIndex(in: realm)
-
-      try realm.write {
-        realm.add(city, update: .all)
-      }
-    } catch {
-      throw RealmError.transactionFailed(description: "Adding new city")
-    }
-  }
-
-  static func add(from placemark: CLPlacemark,
-                  isUserLocation: Bool = true,
-                  in realm: Realm? = RealmProvider.core.realm) throws {
-    guard let realm = realm else { throw RealmError.initializationFailed }
-
-    do {
-      let newCity = City(placemark: placemark, isUserLocation: isUserLocation)
-      newCity.orderIndex = nextSortIndex(in: realm)
-      newCity.isUserLocation = isUserLocation
-
-      try realm.write {
-        realm.add(newCity, update: .all)
-      }
-    } catch {
-      throw RealmError.transactionFailed(description: "Adding new city")
-    }
-  }
-
-  static func add(_ city: City, sortIndex: Int, in realm: Realm? = RealmProvider.core.realm) throws {
-    guard let realm = realm else { throw RealmError.initializationFailed }
-
-    do {
-      city.orderIndex = sortIndex
-
-      try realm.write {
-        realm.add(city, update: .all)
-      }
-    } catch {
-      throw RealmError.transactionFailed(description: "Adding new city")
-    }
-  }
-
-  func delete() throws {
-    guard let realm = realm else { throw RealmError.initializationFailed }
-
-    do {
-      try realm.write {
-        realm.delete(self)
-      }
-    } catch {
-      throw RealmError.transactionFailed(description: "Deleting city")
-    }
-  }
-
-  static func deleteAll(in realm: Realm? = RealmProvider.core.realm) throws {
-    guard let realm = realm else { throw RealmError.initializationFailed }
-
-    do {
-      try realm.write {
-        realm.deleteAll()
-      }
-    } catch {
-      throw RealmError.transactionFailed(description: "Deleting all cities")
-    }
-  }
-
-}
-
-// MARK: - ID interator
-extension City {
-
-  private static func nextSortIndex(in realm: Realm? = RealmProvider.core.realm) -> Int {
-    return (realm?.objects(City.self).map { $0.orderIndex }.max() ?? 0) + 1
-  }
-
 }

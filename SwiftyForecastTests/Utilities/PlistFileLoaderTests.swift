@@ -3,6 +3,7 @@ import XCTest
 
 // swiftlint:disable force_cast
 // swiftlint:disable xctfail_message
+// swiftlint:disable line_length
 class PlistFileLoaderTests: XCTestCase {
   private var bundle: Bundle!
 

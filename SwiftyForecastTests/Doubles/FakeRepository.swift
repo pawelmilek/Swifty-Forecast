@@ -1,7 +1,7 @@
 import Foundation
 @testable import SwiftyForecast
 
-struct TestRepository: Repository {
+struct FakeRepository: Repository {
   private let service: ForecastService
   private let dataAccessObject: ForecastDAO
 

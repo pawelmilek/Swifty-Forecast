@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ForecastView" customModule="SwiftyForecast" customModuleProvider="target">
             <connections>
+                <outlet property="bottomToMoreDetailsTopConstraint" destination="PzC-RE-wcI" id="nFI-CU-yUd"/>
+                <outlet property="bottomToSafeAreaBottomConstraint" destination="3Hq-vg-NkM" id="mqp-Vj-Cez"/>
                 <outlet property="cityNameLabel" destination="UYS-vs-b5M" id="JdV-Mp-7xA"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="f79-1N-K8t"/>
                 <outlet property="dateLabel" destination="P9o-Lu-cAJ" id="W4e-2T-LEb"/>
@@ -18,8 +18,6 @@
                 <outlet property="iconLabel" destination="kCg-Vw-7iy" id="yym-WX-gd6"/>
                 <outlet property="moreDetailsView" destination="uyA-35-njy" id="SEM-sK-Yl7"/>
                 <outlet property="moreDetailsViewBottomConstraint" destination="C9X-zF-e6H" id="O2I-2h-bVx"/>
-                <outlet property="stackViewBottomToMoreDetailsTopConstraint" destination="PzC-RE-wcI" id="nFI-CU-yUd"/>
-                <outlet property="stackViewBottomToSafeAreaBottomConstraint" destination="3Hq-vg-NkM" id="mqp-Vj-Cez"/>
                 <outlet property="sunriseView" destination="kt8-c4-Mi2" id="RAP-gZ-4SA"/>
                 <outlet property="sunsetView" destination="LG5-4m-9gq" id="tqg-qv-j1d"/>
                 <outlet property="temperatureLabel" destination="iJP-Hy-yyQ" id="doY-pO-i2f"/>
@@ -32,22 +30,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="oAj-sZ-wTX">
-                    <rect key="frame" x="84.5" y="5" width="139" height="159"/>
+                    <rect key="frame" x="85" y="5" width="138.5" height="159"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="IconLabel" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCg-Vw-7iy">
-                            <rect key="frame" x="32.5" y="0.0" width="74" height="37"/>
+                            <rect key="frame" x="32" y="0.0" width="74" height="37"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="DateLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9o-Lu-cAJ">
-                            <rect key="frame" x="31" y="40" width="77.5" height="36.5"/>
+                            <rect key="frame" x="30.5" y="40" width="77.5" height="36.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CityNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYS-vs-b5M" userLabel="CityNameLabel">
-                            <rect key="frame" x="17.5" y="79.5" width="104.5" height="15"/>
+                            <rect key="frame" x="17" y="79.5" width="104.5" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="EJc-GY-w4n"/>
                             </constraints>
@@ -56,7 +54,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="TemperatureLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJP-Hy-yyQ">
-                            <rect key="frame" x="0.0" y="97.5" width="139" height="61.5"/>
+                            <rect key="frame" x="0.0" y="97.5" width="138.5" height="61.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -114,6 +112,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="oAj-sZ-wTX" secondAttribute="bottom" constant="5" id="3Hq-vg-NkM"/>
@@ -127,7 +126,6 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="-814.39999999999998" y="-943.17841079460277"/>
         </view>
     </objects>

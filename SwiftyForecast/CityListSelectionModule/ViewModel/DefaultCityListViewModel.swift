@@ -23,7 +23,7 @@ final class DefaultCityListViewModel: CityListViewModel {
   }
 
   private var cityCellViewModels: [CityCellViewModel] {
-    return cityArray.compactMap { DefaultCityCellViewModel(city: $0) }
+    return cityArray.compactMap { DefaultCityCellViewModel(cityCompoundKey: $0.compoundKey) }
   }
 
   private let cityDAO: CityDAO
@@ -107,10 +107,10 @@ extension DefaultCityListViewModel {
 }
 
 // MARK: - Private - Post notifications
-extension DefaultCityListViewModel {
+private extension DefaultCityListViewModel {
 
   func postNotificationLocationCityUpdated(at index: Int) {
-    ForecastNotificationCenter.post(.reloadContentPageData,
+      ForecastNotificationCenter.post(.reloadContentPageData,
                                     object: nil,
                                     userInfo: [NotificationCenterUserInfo.cityUpdatedAtIndex.key: index])
   }
@@ -119,7 +119,7 @@ extension DefaultCityListViewModel {
     guard let deletedCity = storedCities[safe: index] else { return }
     storedCities.remove(at: index)
 
-    ForecastNotificationCenter.post(.cityRemovedFromLocationList,
+      ForecastNotificationCenter.post(.cityRemovedFromLocationList,
                                     object: nil,
                                     userInfo: [NotificationCenterUserInfo.cityUpdated.key: deletedCity])
   }

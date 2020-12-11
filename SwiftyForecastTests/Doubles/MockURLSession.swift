@@ -1,7 +1,7 @@
 import Foundation
 @testable import SwiftyForecast
 
-class URLSessionMock: URLSession {
+class MockURLSession: URLSession {
     typealias CompletionHandler = (Data?, URLResponse?, Error?) -> Void
 
     var data: Data?
@@ -12,6 +12,6 @@ class URLSessionMock: URLSession {
         let data = self.data
         let error = self.error
 
-        return URLSessionDataTaskMock { completionHandler(data, nil, error) }
+        return MockURLSessionDataTask { completionHandler(data, nil, error) }
     }
 }

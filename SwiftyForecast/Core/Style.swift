@@ -229,11 +229,6 @@ struct Style {
     static let glassIconColor = UIColor.systemGray
   }
 
-  // MARK: ActivityIndicatorView
-  struct ActivityIndicator {
-    static let indicatorColor = UIColor.primaryTwo
-  }
-
   // MARK: AddCalloutView
   struct AddCalloutView {
     static let defaultBackgroundColor = UIColor.secondarySystemBackground

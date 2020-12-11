@@ -60,7 +60,7 @@ extension LocationProvider {
 
   func request(completion: @escaping (CLLocation) -> Void) {
     guard isLocationServicesEnabled else {
-      ForecastNotificationCenter.post(.locationServicesDisabled)
+        ForecastNotificationCenter.post(.locationServicesDisabled)
       return
     }
 
@@ -107,7 +107,7 @@ extension LocationProvider: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     locationManager.stopUpdatingLocation()
     debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(error.localizedDescription)")
-    ForecastNotificationCenter.post(.locationProviderDidFail)
+      ForecastNotificationCenter.post(.locationProviderDidFail)
   }
 
 }

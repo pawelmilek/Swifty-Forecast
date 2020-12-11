@@ -27,8 +27,28 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E29911F51D456EAC0083B484"
+            BuildableName = "SwiftyForecast.app"
+            BlueprintName = "SwiftyForecast"
+            ReferencedContainer = "container:SwiftyForecast.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E2CF4D862273C39700062E36"
+               BuildableName = "SwiftyForecastTests.xctest"
+               BlueprintName = "SwiftyForecastTests"
+               ReferencedContainer = "container:SwiftyForecast.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

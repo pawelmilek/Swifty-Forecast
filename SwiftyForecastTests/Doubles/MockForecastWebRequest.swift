@@ -1,7 +1,7 @@
 import Foundation
 @testable import SwiftyForecast
 
-struct TestForecastWebRequest: ForecastWebRequest {
+struct MockForecastWebRequest: ForecastWebRequest {
   var urlRequest: URLRequest {
     return URLRequest(url: baseURL.appendingPathComponent(path))
   }

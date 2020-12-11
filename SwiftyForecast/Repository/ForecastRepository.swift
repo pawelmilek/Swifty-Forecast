@@ -23,7 +23,9 @@ struct ForecastRepository: Repository {
       service.getForecast(latitude: latitude, longitude: longitude) { result in
         switch result {
         case .success(let data):
-          self.dataAccessObject.put(data)
+
+          let dao = DefaultForecastDAO()
+          dao.put(data)
           let forecastDTO = ModelTranslator().translate(forecast: data)
           completion(.success(forecastDTO))
 

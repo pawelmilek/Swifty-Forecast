@@ -1,4 +1,5 @@
 import MapKit
+import RealmSwift
 
 protocol CityCellViewModel {
   var name: String { get }
@@ -6,7 +7,7 @@ protocol CityCellViewModel {
   var miniMapData: (annotation: MKPointAnnotation, region: MKCoordinateRegion)? { get }
   var onSuccessTimeZoneGecoded: (() -> Void)? { get set }
 
-  init(city: CityDTO, timeZoneLoader: TimeZoneLoadable)
+  init(cityCompoundKey: String, cityDAO: CityDAO, timeZoneLoader: TimeZoneLoadable, realm: Realm?)
 
   func loadTimeZone(completion: @escaping (Result<String, GeocoderError>) -> Void) -> UUID?
   func cancelLoad(_ uuid: UUID)

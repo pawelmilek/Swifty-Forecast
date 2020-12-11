@@ -49,7 +49,8 @@ final class DefaultLocationSearchResultsViewModel: LocationSearchResultsViewMode
 
     var comma: String {
       let isStreetInfo = (selectedPlacemark.subThoroughfare != nil || selectedPlacemark.thoroughfare != nil)
-      let isAdministrativeOrStateInfo = (selectedPlacemark.subAdministrativeArea != nil || selectedPlacemark.administrativeArea != nil)
+      let isAdministrativeOrStateInfo = (selectedPlacemark.subAdministrativeArea != nil ||
+                                          selectedPlacemark.administrativeArea != nil)
       return isStreetInfo && isAdministrativeOrStateInfo ? ", " : ""
     }
 
@@ -57,7 +58,14 @@ final class DefaultLocationSearchResultsViewModel: LocationSearchResultsViewMode
     let streetName = selectedPlacemark.thoroughfare ?? ""
     let city = selectedPlacemark.locality ?? ""
     let state = selectedPlacemark.administrativeArea ?? ""
-    let addressLine = String(format: "%@%@%@%@%@%@%@", streetNumber, firstSpace, streetName, comma, city, secondSpace, state)
+    let addressLine = String(format: "%@%@%@%@%@%@%@",
+                             streetNumber,
+                             firstSpace,
+                             streetName,
+                             comma,
+                             city,
+                             secondSpace,
+                             state)
     return addressLine
   }
 }

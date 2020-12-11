@@ -1,18 +1,23 @@
 import MapKit
+import RealmSwift
 
 // swiftlint:disable force_try
 struct DefaultCityCellViewModel: CityCellViewModel {
   var name: String {
+    guard let city = city else { return "" }
     return city.name + ", " + city.country
   }
 
   var localTime: String {
+    guard let city = city else { return "" }
     return city.localTime
   }
 
   var onSuccessTimeZoneGecoded: (() -> Void)?
 
   var miniMapData: (annotation: MKPointAnnotation, region: MKCoordinateRegion)? {
+    guard let city = city else { return nil }
+
     let mkPlacemark = MKPlacemark(placemark: city.placemark)
     let annotation = MKPointAnnotation()
     annotation.coordinate = mkPlacemark.coordinate
@@ -26,32 +31,34 @@ struct DefaultCityCellViewModel: CityCellViewModel {
     return (annotation: annotation, region: region)
   }
 
-  private let city: CityDTO
+  private let cityDAO: CityDAO
   private let timeZoneLoader: TimeZoneLoadable
+  private let realm: Realm?
+  private let city: CityDTO?
 
-  init(city: CityDTO, timeZoneLoader: TimeZoneLoadable = TimeZoneLoader()) {
-    self.city = city
+  init(cityCompoundKey: String,
+       cityDAO: CityDAO = DefaultCityDAO(),
+       timeZoneLoader: TimeZoneLoadable = TimeZoneLoader(),
+       realm: Realm? = RealmProvider.core.realm) {
+
+    self.cityDAO = cityDAO
     self.timeZoneLoader = timeZoneLoader
+    self.realm = realm
+    self.city = ModelTranslator().translate(cityDAO.get(compoundKey: cityCompoundKey))
   }
 
   func loadTimeZone(completion: @escaping (Result<String, GeocoderError>) -> Void) -> UUID? {
-    guard localTime == InvalidReference.notApplicable else {
-      completion(.success(city.timeZoneIdentifier))
+    guard let cityWithoutTimeZone = city, localTime == InvalidReference.notApplicable else {
+      completion(.success(city!.timeZoneIdentifier))
       return nil
     }
 
-    let result = timeZoneLoader.load(for: (city.latitude, city.longitude)) { result in
+    let result = timeZoneLoader.load(for: (cityWithoutTimeZone.latitude, cityWithoutTimeZone.longitude)) { result in
       switch result {
       case .success(let timeZone):
-        let realm = RealmProvider.core.realm
-        let realmCities = try! City.fetchAll(in: realm).filter("compoundKey = %@", city.compoundKey)
-
-        try! realm.write {
-          if let realmCity = realmCities.first {
-            realmCity.timeZoneIdentifier = timeZone.identifier
-            completion(.success(timeZone.identifier))
-          }
-        }
+        try! cityDAO.update(compoundKey: cityWithoutTimeZone.compoundKey,
+                            timeZoneIdentifier: timeZone.identifier,
+                            completion: completion)
 
       case .failure(let error):
         debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(error)")

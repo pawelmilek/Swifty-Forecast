@@ -1,7 +1,7 @@
 import Foundation
 import MapKit
 
-class MKLocalSearchMock: MKLocalSearch {
+class MockMKLocalSearch: MKLocalSearch {
 
   override func start(completionHandler: @escaping MKLocalSearch.CompletionHandler) {
 

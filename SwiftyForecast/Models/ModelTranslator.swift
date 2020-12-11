@@ -1,5 +1,4 @@
 import Foundation
-import RealmSwift
 import CoreLocation
 
 struct ModelTranslator {
@@ -101,7 +100,7 @@ struct ModelTranslator {
 // MARK: - Data Transfer Object translate to model
 extension ModelTranslator {
 
-  func translate(dto: CityDTO, in realm: Realm? = RealmProvider.core.realm) -> City {
+  func translate(dto: CityDTO) -> City {
     let city = City(name: dto.name,
                     country: dto.country,
                     state: dto.state,

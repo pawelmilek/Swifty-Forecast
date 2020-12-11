@@ -15,12 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     setNavigationBarStyle()
 
     // MARK: - Get Realm path
-    debugPrint("File: \(#file), \(RealmProvider.core.configuration.fileURL!)")
+    debugPrint("Realm path: \(RealmProvider.core.configuration.fileURL!)")
     return true
   }
 
   func applicationDidBecomeActive(_ application: UIApplication) {
-    ForecastNotificationCenter.post(.applicationDidBecomeActive)
+      ForecastNotificationCenter.post(.applicationDidBecomeActive)
   }
 }
 
@@ -41,10 +41,10 @@ private extension AppDelegate {
     LocationProvider.shared.authorizationCompletionBlock = { isAuthorized in
       if isAuthorized {
         LocationProvider.shared.request { _ in
-          ForecastNotificationCenter.post(.locationServiceDidRequestLocation)
+            ForecastNotificationCenter.post(.locationServiceDidRequestLocation)
         }
       } else {
-        ForecastNotificationCenter.post(.locationServicesDisabled)
+          ForecastNotificationCenter.post(.locationServicesDisabled)
       }
     }
   }

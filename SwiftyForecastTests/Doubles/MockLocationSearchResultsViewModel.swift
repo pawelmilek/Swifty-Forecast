@@ -2,7 +2,7 @@ import Foundation
 import MapKit
 @testable import SwiftyForecast
 
-class TestLocationSearchResultsViewModel: LocationSearchResultsViewModel {
+class MockLocationSearchResultsViewModel: LocationSearchResultsViewModel {
   var isSearchSearchResultUpdated = false
 
   var matchingItems: [MKMapItem] = []

@@ -236,7 +236,6 @@ extension FontWeatherIconType {
   func attributedString(font size: CGFloat) -> NSAttributedString {
     let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.fontWeather(size: size)]
     let attributedString = NSAttributedString(string: self.iconCode, attributes: attributes)
-
     return attributedString
   }
 

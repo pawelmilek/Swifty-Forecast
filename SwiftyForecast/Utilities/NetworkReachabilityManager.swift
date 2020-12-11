@@ -24,7 +24,7 @@ final class NetworkReachabilityManager {
 private extension NetworkReachabilityManager {
 
   func registerObserver() {
-    ForecastNotificationCenter.add(observer: self,
+      ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(networkStatusChanged),
                                    for: .reachabilityChanged,
                                    object: reachability)

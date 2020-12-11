@@ -3,24 +3,24 @@ import XCTest
 
 // swiftlint:disable force_try
 class HttpClientTests: XCTestCase {
-  private var httpClient: HttpClient<[String: String]>!
-  private var session: URLSessionMock!
+  private var sut: HttpClient<[String: String]>!
+  private var session: MockURLSession!
 
   override func setUp() {
     super.setUp()
-    session = URLSessionMock()
-    httpClient = HttpClient(session: session)
+    session = MockURLSession()
+    sut = HttpClient(session: session)
   }
 
   override func tearDown() {
     super.tearDown()
 
     session = nil
-    httpClient = nil
+    sut = nil
   }
 
   func testGetRequestSuccessResult() {
-    let webRequest = TestForecastWebRequest()
+    let webRequest = MockForecastWebRequest()
     let expectedResult = ["summary": "Mixed precipitation throughout the day."]
     let data = try! JSONSerialization.data(withJSONObject: expectedResult, options: .prettyPrinted)
 
@@ -28,7 +28,7 @@ class HttpClientTests: XCTestCase {
 
     var requestResult: [String: String]!
 
-    httpClient.get(by: webRequest) { result in
+    sut.get(by: webRequest) { result in
       switch result {
       case .success(let data):
         requestResult = data
@@ -42,12 +42,12 @@ class HttpClientTests: XCTestCase {
   }
 
   func testGetRequestFailureResult() {
-    let webRequest = TestForecastWebRequest()
+    let webRequest = MockForecastWebRequest()
     session.data = nil
 
     var requestResult: WebServiceError!
 
-    httpClient.get(by: webRequest) { result in
+    sut.get(by: webRequest) { result in
       switch result {
       case .success:
         requestResult = nil

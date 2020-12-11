@@ -3,9 +3,9 @@ import XCTest
 
 class ContentViewModelTests: XCTestCase {
   private var sut: ContentViewModel!
-  private var httpClient: HttpClient<ForecastResponse>!
-  private var testService: TestForecastService!
-  private var repository: Repository!
+  private var mockHttpClient: HttpClient<ForecastResponse>!
+  private var mockService: MockForecastService!
+  private var fakeRepository: Repository!
   private var notationController: NotationController!
 
   override func setUp() {
@@ -16,22 +16,23 @@ class ContentViewModelTests: XCTestCase {
     userDefaults.removePersistentDomain(forName: defaultsName)
     notationController = NotationController(storage: userDefaults)
 
-    httpClient = HttpClient(session: URLSessionMock())
-    testService = TestForecastService(httpClient: httpClient, request: TestForecastWebRequest())
-    testService.successCompletion = .success(MockGenerator.generateForecast()!)
+    mockHttpClient = HttpClient(session: MockURLSession())
+    mockService = MockForecastService(httpClient: mockHttpClient, request: MockForecastWebRequest())
+    mockService.successCompletion = .success(MockGenerator.generateForecast()!)
 
-    repository = TestRepository(service: testService, dataAccessObject: TestForecastDAO())
-    sut = DefaultContentViewModel(city: MockGenerator.generateCityDTO(),
-                                  repository: repository,
+    fakeRepository = FakeRepository(service: mockService,
+                                    dataAccessObject: DefaultForecastDAO(realm: RealmProvider.core.fakeForTesting.realm))
+    sut = DefaultContentViewModel(city: MockGenerator.generateCupertinoCityDTO(),
+                                  repository: fakeRepository,
                                   notationController: notationController)
   }
 
   override func tearDown() {
     super.tearDown()
 
-    httpClient = nil
-    testService = nil
-    repository = nil
+    mockHttpClient = nil
+    mockService = nil
+    fakeRepository = nil
     sut = nil
   }
 

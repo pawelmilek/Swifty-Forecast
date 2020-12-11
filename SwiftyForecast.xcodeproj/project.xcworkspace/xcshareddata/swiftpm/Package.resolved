@@ -2,11 +2,20 @@
   "object": {
     "pins": [
       {
+        "package": "PMActivityIndicatorView",
+        "repositoryURL": "https://github.com/pawelmilek/PMActivityIndicatorView.git",
+        "state": {
+          "branch": "master",
+          "revision": "80c5b53c7f3c3f7415730f97eec3174a292c1a75",
+          "version": null
+        }
+      },
+      {
         "package": "PMSegmentedControl",
         "repositoryURL": "https://github.com/pawelmilek/PMSegmentedControl.git",
         "state": {
           "branch": "master",
-          "revision": "034762ce14d5920f7e54aec81efe557997a12183",
+          "revision": "c22c40db644598a1a7ebb8c7356835f5092c7b6c",
           "version": null
         }
       },

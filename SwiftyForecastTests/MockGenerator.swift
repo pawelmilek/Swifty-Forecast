@@ -50,7 +50,29 @@ struct MockGenerator {
 // MARK: - Data Transfer Objects
 extension MockGenerator {
 
-  static func generateCityDTO() -> CityDTO {
+  static func generateChicagoWithInvalidLocalTimeCityDTO() -> CityDTO {
+    let latitude = 41.881832
+    let longitude = -87.623177
+    let name = "Chicago"
+    let location = CLLocation(latitude: latitude, longitude: longitude)
+    let placemark = CLPlacemark(location: location, name: name, postalAddress: nil)
+    let cityDTO = CityDTO(compoundKey: "Chicago|United States|IL",
+                          name: "Chicago",
+                          country: "United States",
+                          state: "IL",
+                          postalCode: "67890",
+                          timeZoneIdentifier: "America/Chicago",
+                          lastUpdate: Date(), //"2020-10-18T18:56:04.793Z",
+                          isUserLocation: false,
+                          latitude: latitude,
+                          longitude: longitude,
+                          placemark: placemark,
+                          localTime: InvalidReference.notApplicable)
+
+    return cityDTO
+  }
+
+  static func generateCupertinoCityDTO() -> CityDTO {
     let latitude = 37.33233141
     let longitude = -122.0312186
     let name = "Cupertino"
@@ -61,6 +83,28 @@ extension MockGenerator {
                           country: "United States",
                           state: "CA",
                           postalCode: "95014",
+                          timeZoneIdentifier: "America/Los_Angeles",
+                          lastUpdate: Date(), //"2020-10-18T18:56:04.793Z",
+                          isUserLocation: true,
+                          latitude: latitude,
+                          longitude: longitude,
+                          placemark: placemark,
+                          localTime: "10:00AM")
+
+    return cityDTO
+  }
+
+  static func generateSanFranciscoCityDTO() -> CityDTO {
+    let latitude = 37.773972
+    let longitude = -122.431297
+    let name = "San Francisco"
+    let location = CLLocation(latitude: latitude, longitude: longitude)
+    let placemark = CLPlacemark(location: location, name: name, postalAddress: nil)
+    let cityDTO = CityDTO(compoundKey: "San Francisco|United States|CA",
+                          name: "San Francisco",
+                          country: "United States",
+                          state: "CA",
+                          postalCode: "12345",
                           timeZoneIdentifier: "America/Los_Angeles",
                           lastUpdate: Date(), //"2020-10-18T18:56:04.793Z",
                           isUserLocation: true,

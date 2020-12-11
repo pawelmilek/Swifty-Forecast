@@ -17,62 +17,60 @@ struct ConditionFontIcon {
     case tornado = "tornado"
   }
 
-  typealias T = ConditionFontIcon
-  var attributedIcon: NSAttributedString
+  let attributedIcon: NSAttributedString
 
-  init?(attributedIcon: NSAttributedString?) {
-    guard let attributedIcon = attributedIcon else { return nil }
+  init(attributedIcon: NSAttributedString) {
     self.attributedIcon = attributedIcon
   }
 }
 
 // MARK: - WeatherFontIcon protocol
-extension ConditionFontIcon: FontWeatherIcon {
+extension ConditionFontIcon {
 
   static func make(icon: String, font size: CGFloat) -> ConditionFontIcon? {
     guard let condition = ConditionType(rawValue: icon) else { return nil }
 
-    var attributedFont: NSAttributedString?
+    var attributedFont: NSAttributedString {
+      switch condition {
+      case .clearDay:
+        return FontWeatherIconType.daySunny.attributedString(font: size)
 
-    switch condition {
-    case .clearDay:
-      attributedFont = FontWeatherIconType.daySunny.attributedString(font: size)
+      case .clearNight:
+        return FontWeatherIconType.nightClear.attributedString(font: size)
 
-    case .clearNight:
-      attributedFont = FontWeatherIconType.nightClear.attributedString(font: size)
+      case .cloudy:
+        return FontWeatherIconType.dayCloudy.attributedString(font: size)
 
-    case .cloudy:
-      attributedFont = FontWeatherIconType.dayCloudy.attributedString(font: size)
+      case .partlyCloudyDay:
+        return FontWeatherIconType.dayCloudy.attributedString(font: size)
 
-    case .partlyCloudyDay:
-      attributedFont = FontWeatherIconType.dayCloudy.attributedString(font: size)
+      case .partlyCloudyNight:
+        return FontWeatherIconType.nightCloudy.attributedString(font: size)
 
-    case .partlyCloudyNight:
-      attributedFont = FontWeatherIconType.nightCloudy.attributedString(font: size)
+      case .fog:
+        return FontWeatherIconType.fog.attributedString(font: size)
 
-    case .fog:
-      attributedFont = FontWeatherIconType.fog.attributedString(font: size)
+      case .rain:
+        return FontWeatherIconType.rain.attributedString(font: size)
 
-    case .rain:
-      attributedFont = FontWeatherIconType.rain.attributedString(font: size)
+      case .snow:
+        return FontWeatherIconType.snow.attributedString(font: size)
 
-    case .snow:
-      attributedFont = FontWeatherIconType.snow.attributedString(font: size)
+      case .sleet:
+        return FontWeatherIconType.sleet.attributedString(font: size)
 
-    case .sleet:
-      attributedFont = FontWeatherIconType.sleet.attributedString(font: size)
+      case .wind:
+        return FontWeatherIconType.windy.attributedString(font: size)
 
-    case .wind:
-      attributedFont = FontWeatherIconType.windy.attributedString(font: size)
+      case .hail:
+        return FontWeatherIconType.hail.attributedString(font: size)
 
-    case .hail:
-      attributedFont = FontWeatherIconType.hail.attributedString(font: size)
+      case .thunderstorm:
+        return FontWeatherIconType.thunderstorm.attributedString(font: size)
 
-    case .thunderstorm:
-      attributedFont = FontWeatherIconType.thunderstorm.attributedString(font: size)
-
-    case .tornado:
-      attributedFont = FontWeatherIconType.tornado.attributedString(font: size)
+      case .tornado:
+        return FontWeatherIconType.tornado.attributedString(font: size)
+      }
     }
 
     return ConditionFontIcon(attributedIcon: attributedFont)

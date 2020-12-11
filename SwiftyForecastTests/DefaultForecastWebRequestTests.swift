@@ -1,38 +1,38 @@
 import XCTest
 @testable import SwiftyForecast
 
-class ForecastWebServiceTests: XCTestCase {
-  private var request: DefaultForecastWebRequest!
+class DefaultForecastWebRequestTests: XCTestCase {
+  private var sut: DefaultForecastWebRequest!
 
   override func setUp() {
     super.setUp()
-    request = DefaultForecastWebRequest()
-    request.latitude = 12.999
-    request.longitude = -12.999
+    sut = DefaultForecastWebRequest()
+    sut.latitude = 12.999
+    sut.longitude = -12.999
   }
 
   override func tearDown() {
     super.tearDown()
-    request = nil
+    sut = nil
   }
 
   func testbaseURL() {
     let expected = "https://api.forecast.io"
-    XCTAssertEqual(request.baseURL.absoluteString, expected)
+    XCTAssertEqual(sut.baseURL.absoluteString, expected)
   }
 
   func testPathWithDarkSkyAPIKey() {
     let expected = "forecast/6a92402c27dfc4740168ec5c0673a760/12.999,-12.999"
-    XCTAssertEqual(request.path, expected)
+    XCTAssertEqual(sut.path, expected)
   }
 
   func testRequestAbsoluteURL() {
     let expected = URL(string: "https://api.forecast.io/forecast/6a92402c27dfc4740168ec5c0673a760/12.999,-12.999")!
-    XCTAssertEqual(request.urlRequest.url!.absoluteURL, expected)
+    XCTAssertEqual(sut.urlRequest.url!.absoluteURL, expected)
   }
 
   func testParametersWithUnitsAsUSExcludeMinutelyAlertsFlags() {
     let expected = ["units": "us", "exclude": "minutely,alerts,flags"]
-    XCTAssertEqual(request.parameters, expected)
+    XCTAssertEqual(sut.parameters, expected)
   }
 }
