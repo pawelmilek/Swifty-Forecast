@@ -1,6 +1,7 @@
 import Foundation
 import CoreLocation
 import RealmSwift
+import PMSegmentedControl
 
 final class DefaultContentViewModel: ContentViewModel {
   var hourly: HourlyForecastDTO? {
@@ -39,7 +40,8 @@ final class DefaultContentViewModel: ContentViewModel {
       return temperatureInCelsius.roundedToString + Style.degreeSign
 
     case .fahrenheit:
-      AppStoreReviewNotifier.notify(.enjoyableOutsideTemperatureReached(value: Int(currently.temperature.roundedToString) ?? 0))
+      let value = Int(currently.temperature.roundedToString) ?? 0
+      AppStoreReviewNotifier.notify(.enjoyableOutsideTemperatureReached(value: value))
       return currently.temperature.roundedToString + Style.degreeSign
     }
   }
@@ -127,6 +129,14 @@ extension DefaultContentViewModel {
 
       self.isLoadingData = false
     }
+  }
+
+  func updateNotation(by userInfo: [AnyHashable : Any]) {
+    guard let segmented = userInfo[NotificationCenterUserInfo.segmentedControlChanged.key] as? PMSegmentedControl else { return }
+    guard let unitNotation = UnitNotation(rawValue: segmented.selectedIndex) else { return }
+    guard let temperatureNotation = TemperatureNotation(rawValue: segmented.selectedIndex) else { return }
+    notationController.unitNotation = unitNotation
+    notationController.temperatureNotation = temperatureNotation
   }
 
 }

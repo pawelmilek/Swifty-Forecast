@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidBecomeActive(_ application: UIApplication) {
-    ForecastNotificationCenter.post(.applicationDidBecomeActive)
+      ForecastNotificationCenter.post(.applicationDidBecomeActive)
   }
 }
 
@@ -41,10 +41,10 @@ private extension AppDelegate {
     LocationProvider.shared.authorizationCompletionBlock = { isAuthorized in
       if isAuthorized {
         LocationProvider.shared.request { _ in
-          ForecastNotificationCenter.post(.locationServiceDidRequestLocation)
+            ForecastNotificationCenter.post(.locationServiceDidRequestLocation)
         }
       } else {
-        ForecastNotificationCenter.post(.locationServicesDisabled)
+          ForecastNotificationCenter.post(.locationServicesDisabled)
       }
     }
   }

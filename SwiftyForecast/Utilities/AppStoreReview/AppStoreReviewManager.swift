@@ -1,6 +1,8 @@
 import StoreKit
 
 final class AppStoreReviewManager {
+  private let configFileName = "ReviewDesirableMomentConfig"
+
   private lazy var lastReviewAppVersion = loadLastReviewVersion() {
     didSet { saveLastReviewVersion() }
   }
@@ -21,20 +23,20 @@ final class AppStoreReviewManager {
     return desirableMoments.locationCount
   }
 
-  private var minimumReviewWortyDetailsInteractionCount: Int {
+  private var minReviewWortyDetailsInteractionCount: Int {
     return desirableMoments.detailsInteractionCount
   }
 
-  private var reviewWortyMinEnjoyableTemperatureInFahrenheit: Int {
+  private var reviewWortyMinEnjoyableTempInFahrenheit: Int {
     return desirableMoments.minEnjoyableTemperatureInFahrenheit
   }
 
-  private var reviewWortyMaxEnjoyableTemperatureInFahrenheit: Int {
+  private var reviewWortyMaxEnjoyableTempInFahrenheit: Int {
     return desirableMoments.maxEnjoyableTemperatureInFahrenheit
   }
 
   private lazy var desirableMoments: ReviewDesirableMomentConfig = {
-    guard let config: ReviewDesirableMomentConfig = try? PlistFileLoader.loadPropertyListDecodable(with: "ReviewDesirableMomentConfig") else {
+    guard let config: ReviewDesirableMomentConfig = try? PlistFileLoader.loadPropertyListDecodable(with: configFileName) else {
       fatalError("File: \(#file), Function: \(#function), line: \(#line)")
     }
 
@@ -61,7 +63,7 @@ final class AppStoreReviewManager {
       lastDetailsInteractionCount = currentDetailsInteractionCount
       debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(lastDetailsInteractionCount)")
 
-      guard lastDetailsInteractionCount >= minimumReviewWortyDetailsInteractionCount else { return }
+      guard lastDetailsInteractionCount >= minReviewWortyDetailsInteractionCount else { return }
       currentDetailsInteractionCount = 0
       lastDetailsInteractionCount = 0
 
@@ -76,8 +78,8 @@ final class AppStoreReviewManager {
       lastReviewLocationCount = 0
 
     case .enjoyableOutsideTemperatureReached(let value):
-      let min = reviewWortyMinEnjoyableTemperatureInFahrenheit
-      let max = reviewWortyMaxEnjoyableTemperatureInFahrenheit
+      let min = reviewWortyMinEnjoyableTempInFahrenheit
+      let max = reviewWortyMaxEnjoyableTempInFahrenheit
       debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(value)")
 
       guard (min...max).contains(value) else { return }

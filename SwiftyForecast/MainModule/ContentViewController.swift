@@ -6,9 +6,9 @@ final class ContentViewController: UIViewController {
   @IBOutlet private weak var weekdaysTableView: UITableView!
 
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
-  private var forecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
-  private var forecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
-  private var forecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
+  private var moreDetailsViewBottomConstraint: NSLayoutConstraint?
+  private var bottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
+  private var bottomToSafeAreaBottomConstraint: NSLayoutConstraint?
 
   var pageIndex: Int {
     get {
@@ -70,9 +70,9 @@ private extension ContentViewController {
   }
 
   func arrangeConstraints() {
-    forecastViewMoreDetailsViewBottomConstraint = forecastView.moreDetailsViewBottomConstraint
-    forecastViewStackViewBottomToMoreDetailsBottomConstraint = forecastView.stackViewBottomToMoreDetailsTopConstraint
-    forecastViewStackViewBottomToSafeAreaBottomConstraint = forecastView.stackViewBottomToSafeAreaBottomConstraint
+    moreDetailsViewBottomConstraint = forecastView.moreDetailsViewBottomConstraint
+    bottomToMoreDetailsBottomConstraint = forecastView.bottomToMoreDetailsTopConstraint
+    bottomToSafeAreaBottomConstraint = forecastView.bottomToSafeAreaBottomConstraint
     dailyForecastTableViewBottomConstraint = forecastView.bottomAnchor.constraint(equalTo: weekdaysTableView.bottomAnchor,
                                                                                   constant: 0)
   }
@@ -89,13 +89,13 @@ private extension ContentViewController {
 private extension ContentViewController {
 
   func addNotificationObservers() {
-    ForecastNotificationCenter.add(observer: self,
-                                   selector: #selector(unitNotationDidChange),
-                                   for: .unitNotationDidChange)
+      ForecastNotificationCenter.add(observer: self,
+                                            selector: #selector(unitNotationDidChange),
+                                            for: .unitNotationDidChange)
   }
 
   func removeNotificationObservers() {
-    ForecastNotificationCenter.remove(observer: self)
+      ForecastNotificationCenter.remove(observer: self)
   }
 
 }
@@ -140,10 +140,10 @@ extension ContentViewController: ForecastViewDelegate {
   func currentForecastDidExpand() {
     animateBouncingEffect()
 
-    forecastViewMoreDetailsViewBottomConstraint?.constant = 0
+    moreDetailsViewBottomConstraint?.constant = 0
     dailyForecastTableViewBottomConstraint?.isActive = true
-    forecastViewStackViewBottomToSafeAreaBottomConstraint?.isActive = false
-    forecastViewStackViewBottomToMoreDetailsBottomConstraint?.isActive = true
+    bottomToSafeAreaBottomConstraint?.isActive = false
+    bottomToMoreDetailsBottomConstraint?.isActive = true
 
     UIView.animate(withDuration: 0.5,
                    delay: 0.1,
@@ -163,10 +163,10 @@ extension ContentViewController: ForecastViewDelegate {
   func currentForecastDidCollapse() {
     let height = forecastView.frame.size.height
 
-    forecastViewMoreDetailsViewBottomConstraint?.constant = height
+    moreDetailsViewBottomConstraint?.constant = height
     dailyForecastTableViewBottomConstraint?.isActive = false
-    forecastViewStackViewBottomToSafeAreaBottomConstraint?.isActive = true
-    forecastViewStackViewBottomToMoreDetailsBottomConstraint?.isActive = false
+    bottomToSafeAreaBottomConstraint?.isActive = true
+    bottomToMoreDetailsBottomConstraint?.isActive = false
 
     UIView.animate(withDuration: 0.5,
                    delay: 0.1,
@@ -242,13 +242,8 @@ extension ContentViewController: UITableViewDelegate {
 extension ContentViewController {
 
   @objc func unitNotationDidChange(_ notification: NSNotification) {
-    guard let segmentedControl = notification.userInfo?[NotificationCenterUserInfo.segmentedControlChanged.key] as? PMSegmentedControl else { return }
-    guard let unitNotation = UnitNotation(rawValue: segmentedControl.selectedIndex) else { return }
-    guard let temperatureNotation = TemperatureNotation(rawValue: segmentedControl.selectedIndex) else { return }
-
-    let notationController = NotationController()
-    notationController.unitNotation = unitNotation
-    notationController.temperatureNotation = temperatureNotation
+    guard let userInfo = notification.userInfo else { return }
+    viewModel?.updateNotation(by: userInfo)
     selectionFeedback()
     reloadData()
   }

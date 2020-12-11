@@ -2,15 +2,16 @@ import Foundation
 
 final class PathFinder {
   static let groupIdentifier = "group.com.pawelmilek.Swifty-Forecast"
+  private static let shared = FileManager.default
 
   static func inLibrary(_ name: String) throws -> URL {
-    return try FileManager.default
+    return try shared
       .url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
       .appendingPathComponent(name)
   }
 
   static func inDocuments(_ name: String) throws -> URL {
-    return try FileManager.default
+    return try shared
       .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
       .appendingPathComponent(name)
   }
@@ -23,13 +24,13 @@ final class PathFinder {
   }
 
   static func inSharedContainer(_ name: String) throws -> URL {
-    guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: PathFinder.groupIdentifier) else {
+    guard let url = shared.containerURL(forSecurityApplicationGroupIdentifier: PathFinder.groupIdentifier) else {
       throw PathError.containerNotFound(identifier: PathFinder.groupIdentifier)
     }
     return url.appendingPathComponent(name)
   }
 
   static func documents() throws -> URL {
-    return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    return try shared.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
   }
 }

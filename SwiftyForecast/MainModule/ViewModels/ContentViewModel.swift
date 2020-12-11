@@ -23,4 +23,5 @@ protocol ContentViewModel: class {
   init(city: CityDTO, repository: Repository, notationController: NotationController)
 
   func loadData()
+  func updateNotation(by userInfo: [AnyHashable : Any])
 }

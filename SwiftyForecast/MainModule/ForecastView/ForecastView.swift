@@ -13,8 +13,8 @@ final class ForecastView: UIView {
   @IBOutlet private weak var hourlyCollectionView: UICollectionView!
   @IBOutlet private weak var moreDetailsView: UIView!
   @IBOutlet weak var moreDetailsViewBottomConstraint: NSLayoutConstraint!
-  @IBOutlet weak var stackViewBottomToMoreDetailsTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var stackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint!
+  @IBOutlet weak var bottomToMoreDetailsTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var bottomToSafeAreaBottomConstraint: NSLayoutConstraint!
 
   private lazy var backgroundImageView: UIImageView = {
     let imageView = UIImageView(frame: .zero)
@@ -155,28 +155,30 @@ private extension ForecastView {
 extension ForecastView {
 
   func configure(by viewModel: ContentViewModel) {
-    iconLabel.attributedText = viewModel.icon
-    dateLabel.text = viewModel.weekdayMonthDay
-    cityNameLabel.text = viewModel.cityName
-    temperatureLabel.text = viewModel.temperature
+    DispatchQueue.main.async { [weak self] in
+      self?.iconLabel.attributedText = viewModel.icon
+      self?.dateLabel.text = viewModel.weekdayMonthDay
+      self?.cityNameLabel.text = viewModel.cityName
+      self?.temperatureLabel.text = viewModel.temperature
 
-    windView.configure(condition: .strongWind, value: viewModel.windSpeed)
-    humidityView.configure(condition: .humidity, value: viewModel.humidity)
-    sunriseView.configure(condition: .sunrise, value: viewModel.sunriseTime)
-    sunsetView.configure(condition: .sunset, value: viewModel.sunsetTime)
+      self?.windView.configure(condition: .strongWind, value: viewModel.windSpeed)
+      self?.humidityView.configure(condition: .humidity, value: viewModel.humidity)
+      self?.sunriseView.configure(condition: .sunrise, value: viewModel.sunriseTime)
+      self?.sunsetView.configure(condition: .sunset, value: viewModel.sunsetTime)
 
-    iconLabel.alpha = 1
-    dateLabel.alpha = 1
-    cityNameLabel.alpha = 1
-    temperatureLabel.alpha = 1
-    windView.alpha = 1
-    humidityView.alpha = 1
-    sunriseView.alpha = 1
-    sunsetView.alpha = 1
+      self?.iconLabel.alpha = 1
+      self?.dateLabel.alpha = 1
+      self?.cityNameLabel.alpha = 1
+      self?.temperatureLabel.alpha = 1
+      self?.windView.alpha = 1
+      self?.humidityView.alpha = 1
+      self?.sunriseView.alpha = 1
+      self?.sunsetView.alpha = 1
 
-    viewModels = viewModel.hourly?.data.compactMap { DefaultHourlyCellViewModel(hourlyData: $0) }
-    hourlyCollectionView.reloadData()
-    moreDetailsView.alpha = 1
+      self?.viewModels = viewModel.hourly?.data.compactMap { DefaultHourlyCellViewModel(hourlyData: $0) }
+      self?.hourlyCollectionView.reloadData()
+      self?.moreDetailsView.alpha = 1
+    }
   }
 
 }

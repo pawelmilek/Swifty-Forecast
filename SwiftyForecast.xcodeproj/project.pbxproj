@@ -104,6 +104,7 @@
 		E2786E42257C1EDA0031DF24 /* ColorFromHexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2786E41257C1EDA0031DF24 /* ColorFromHexTests.swift */; };
 		E2786E47257C1F210031DF24 /* ColorFromRGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2786E46257C1F210031DF24 /* ColorFromRGBTests.swift */; };
 		E2786E4C257C26040031DF24 /* UIImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2786E4B257C26040031DF24 /* UIImageTests.swift */; };
+		E2786E84258315F60031DF24 /* ForecastNotificationCenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2786E83258315F60031DF24 /* ForecastNotificationCenterTests.swift */; };
 		E27E2F831DA0482C00B3EABF /* CityListSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F7F1DA0482C00B3EABF /* CityListSelectionViewController.swift */; };
 		E27E2F861DA0482C00B3EABF /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F821DA0482C00B3EABF /* ContentViewController.swift */; };
 		E27E2F881DA0487600B3EABF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F871DA0487600B3EABF /* Main.storyboard */; };
@@ -353,6 +354,7 @@
 		E2786E41257C1EDA0031DF24 /* ColorFromHexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFromHexTests.swift; sourceTree = "<group>"; };
 		E2786E46257C1F210031DF24 /* ColorFromRGBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFromRGBTests.swift; sourceTree = "<group>"; };
 		E2786E4B257C26040031DF24 /* UIImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageTests.swift; sourceTree = "<group>"; };
+		E2786E83258315F60031DF24 /* ForecastNotificationCenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastNotificationCenterTests.swift; sourceTree = "<group>"; };
 		E27E2F7F1DA0482C00B3EABF /* CityListSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityListSelectionViewController.swift; sourceTree = "<group>"; };
 		E27E2F821DA0482C00B3EABF /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		E27E2F871DA0487600B3EABF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -867,7 +869,6 @@
 		E29911ED1D456EAC0083B484 = {
 			isa = PBXGroup;
 			children = (
-				E2786E4B257C26040031DF24 /* UIImageTests.swift */,
 				E29911F81D456EAD0083B484 /* SwiftyForecast */,
 				E2CF4D882273C39700062E36 /* SwiftyForecastTests */,
 				E26D606D255CD6730071522D /* SwiftyForecastWidget */,
@@ -1001,6 +1002,7 @@
 				E2CF4D8B2273C39700062E36 /* Info.plist */,
 				E2A32F2A2544625B000ACEFE /* AppStoreReviewManagerTests.swift */,
 				E22145F22569CBE60023CDC3 /* LocationSearchResultsViewModelTests.swift */,
+				E2786E4B257C26040031DF24 /* UIImageTests.swift */,
 				E22145B32564B7E40023CDC3 /* BundleApplicationInfoTests.swift */,
 				E24EB880253FA8EB001F5D72 /* CityCellViewModelTests.swift */,
 				E22145D8256749390023CDC3 /* CityListViewModelTests.swift */,
@@ -1014,6 +1016,7 @@
 				E27292902536812700F7E872 /* DistanceMeasurementTests.swift */,
 				E272928625367D1E00F7E872 /* DoubleRoundedToStringTests.swift */,
 				E272928C25367FF200F7E872 /* DoubleToKPHTests.swift */,
+				E2786E83258315F60031DF24 /* ForecastNotificationCenterTests.swift */,
 				E2729294253682D800F7E872 /* DoubleToTemperatureTests.swift */,
 				E2A32F872544D7FF000ACEFE /* FontLoaderTests.swift */,
 				E2B035B12509BCC200DC0E77 /* ForecastRepositoryTests.swift */,
@@ -1481,6 +1484,7 @@
 				E2786E4C257C26040031DF24 /* UIImageTests.swift in Sources */,
 				E2CF4D8A2273C39700062E36 /* HourlyForecastTests.swift in Sources */,
 				E24EB88F2540FF64001F5D72 /* TestRepository.swift in Sources */,
+				E2786E84258315F60031DF24 /* ForecastNotificationCenterTests.swift in Sources */,
 				E2729283252E929200F7E872 /* StringToDateTests.swift in Sources */,
 				E2786E3D257C1DE70031DF24 /* NotificationCenterUserInfoTests.swift in Sources */,
 				E285500622922AB700CD7554 /* CurrentForecastTests.swift in Sources */,

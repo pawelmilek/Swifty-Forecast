@@ -148,28 +148,28 @@ private extension ForecastViewController {
 private extension ForecastViewController {
 
   func addNotificationObservers() {
-    ForecastNotificationCenter.add(observer: self,
+      ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(locationServiceDidRequestLocation),
                                    for: .locationServiceDidRequestLocation)
-    ForecastNotificationCenter.add(observer: self,
+      ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(applicationDidBecomeActive),
                                    for: .applicationDidBecomeActive)
 
-    ForecastNotificationCenter.add(observer: self,
+      ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(contentDataDidChange),
                                    for: .reloadContentPageData)
 
-    ForecastNotificationCenter.add(observer: self,
+      ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(locationDidRemoveFromList),
                                    for: .cityRemovedFromLocationList)
 
-    ForecastNotificationCenter.add(observer: self,
+      ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(locationProviderDidFailWithError),
                                    for: .locationProviderDidFail)
   }
 
   func removeNotificationObservers() {
-    ForecastNotificationCenter.remove(observer: self)
+      ForecastNotificationCenter.remove(observer: self)
   }
 
 }

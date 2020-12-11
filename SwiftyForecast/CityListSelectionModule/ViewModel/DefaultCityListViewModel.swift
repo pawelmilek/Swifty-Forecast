@@ -110,7 +110,7 @@ extension DefaultCityListViewModel {
 extension DefaultCityListViewModel {
 
   func postNotificationLocationCityUpdated(at index: Int) {
-    ForecastNotificationCenter.post(.reloadContentPageData,
+      ForecastNotificationCenter.post(.reloadContentPageData,
                                     object: nil,
                                     userInfo: [NotificationCenterUserInfo.cityUpdatedAtIndex.key: index])
   }
@@ -119,7 +119,7 @@ extension DefaultCityListViewModel {
     guard let deletedCity = storedCities[safe: index] else { return }
     storedCities.remove(at: index)
 
-    ForecastNotificationCenter.post(.cityRemovedFromLocationList,
+      ForecastNotificationCenter.post(.cityRemovedFromLocationList,
                                     object: nil,
                                     userInfo: [NotificationCenterUserInfo.cityUpdated.key: deletedCity])
   }

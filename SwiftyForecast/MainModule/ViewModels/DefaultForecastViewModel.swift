@@ -103,7 +103,7 @@ final class DefaultForecastViewModel: ForecastViewModel {
   func loadAllData() {
     isLoadingData = true
 
-    for (index, _) in allCities.enumerated() {
+    for index in allCities.indices {
       if index == Self.userLocationPageControlIndex {
         loadUserLocationDataAsync(dispatchGroup: dispatchGroup)
       } else {
@@ -126,9 +126,9 @@ final class DefaultForecastViewModel: ForecastViewModel {
   }
 
   func measuringSystemSwitched(_ sender: PMSegmentedControl) {
-    ForecastNotificationCenter.post(.unitNotationDidChange,
-                                    object: nil,
-                                    userInfo: [NotificationCenterUserInfo.segmentedControlChanged.key: sender])
+      ForecastNotificationCenter.post(.unitNotationDidChange,
+                                             object: nil,
+                                             userInfo: [NotificationCenterUserInfo.segmentedControlChanged.key: sender])
   }
 
   func showOrHideLocationServicesPrompt(at navigationController: UINavigationController) {
@@ -140,7 +140,8 @@ final class DefaultForecastViewModel: ForecastViewModel {
         viewController.navigationItem.prompt = nil
 
       } else {
-        navigationController.viewControllers.first!.navigationItem.prompt = NSLocalizedString("Please enable location services", comment: "")
+        let topViewController = navigationController.viewControllers.first
+        topViewController?.navigationItem.prompt = NSLocalizedString("Please enable location services", comment: "")
         DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds + 3) {
           viewController.navigationItem.prompt = nil
           navigationController.viewIfLoaded?.setNeedsLayout()

@@ -33,12 +33,12 @@ struct DefaultMapCalloutViewModel: MapCalloutViewModel {
       delegate?.calloutViewController(didAdd: cityDao)
       AppStoreReviewNotifier.notify(.locationAdded)
     } catch {
-      debugPrint("File: \(#file), Function: \(#function), line: \(#line) Unexpected Realm \(RealmError.initializationFailed)")
+      debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(RealmError.initializationFailed)")
     }
   }
 
   private func isExisting(_ city: CityDTO) -> Bool {
-    guard dataAccessObject.getAllResultOrderedByIndex()?.first(where: { $0.compoundKey == city.compoundKey }) != nil else {
+    guard dataAccessObject.getAllResultOrderedByIndex()?.first { $0.compoundKey == city.compoundKey } != nil else {
       return false
     }
     return true
