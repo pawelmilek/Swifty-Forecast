@@ -1074,6 +1074,7 @@
 				E2B035B72509C04B00DC0E77 /* DefaultForecastWebRequestTests.swift */,
 				E272928625367D1E00F7E872 /* DoubleRoundedToStringTests.swift */,
 				E272928C25367FF200F7E872 /* DoubleToKPHTests.swift */,
+				E2786E83258315F60031DF24 /* ForecastNotificationCenterTests.swift */,
 				E2729294253682D800F7E872 /* DoubleToTemperatureTests.swift */,
 				E2B035B12509BCC200DC0E77 /* ForecastRepositoryTests.swift */,
 				E24EB89225410010001F5D72 /* MockGenerator.swift */,
